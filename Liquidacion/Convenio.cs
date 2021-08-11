@@ -12,21 +12,21 @@ using MySql.Data.MySqlClient;
 
 namespace Liquidacion
 {
-    public partial class obraSocial : Form
+    public partial class Convenio : Form
     {
-        public obraSocial()
+        public Convenio()
         {
             InitializeComponent();
         }
 
-        private void obraSocial_Load(object sender, EventArgs e)
+        private void Convenio_Load(object sender, EventArgs e)
         {
             MySqlConnection conectar = Conexion.ObtenerConexion();
             conectar.Open();
             try
             {
                 //completo el cuadro
-                DataTable dt2 = Conexion.VerObraSocial();
+                DataTable dt2 = Conexion.VerConvenio();
                 Cuadro.Rows.Clear();
                 if (dt2 != null)
                 {
@@ -36,16 +36,17 @@ namespace Liquidacion
                         int n = Cuadro.Rows.Add();
                         Cuadro.Rows[n].Cells[0].Value = false;
                         Cuadro.Rows[n].Cells[1].Value = (int)x[0];
-                        Cuadro.Rows[n].Cells[2].Value = (int)x[1];
+                        Cuadro.Rows[n].Cells[2].Value = (string)x[1];
                         Cuadro.Rows[n].Cells[3].Value = (string)x[2];
-                        Cuadro.Rows[n].Cells[4].Value = (string)x[3];
+                        Cuadro.Rows[n].Cells[4].Value = (int)x[3];
+                        Cuadro.Rows[n].Cells[5].Value = (int)x[4];
 
                     }
                 }
 
             }
             catch (MySqlException ex) { MessageBox.Show("Error al buscar " + ex.Message); }
-            finally { conectar.Close();}
+            finally { conectar.Close(); }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -70,16 +71,16 @@ namespace Liquidacion
 
 
 
-        private void telefonoTBX_TextChanged(object sender, EventArgs e)
-        {
+        //private void telefonoTBX_TextChanged(object sender, EventArgs e)
+        //{
 
-        }
+        //}
 
-        private void CelularTBX_TextChanged(object sender, EventArgs e)
-        {
+        //private void CelularTBX_TextChanged(object sender, EventArgs e)
+        //{
 
 
-        }
+        //}
 
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -94,31 +95,31 @@ namespace Liquidacion
 
         private void Agregar_Click(object sender, EventArgs e)
         {
-            if ( descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red  && NumTBX.Text != "" && abreviaturaTBX.Text != "")
+            if ( CodigoTXT.Text!="" && descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red  && NumTBX.Text != "" && AñoTXT.ForeColor != System.Drawing.Color.Red && AñoTXT.Text!="")
             {
                 try
                 {
-                   Conexion.AgregarObraSocial(int.Parse(NumTBX.Text), descripcionTBX.Text, abreviaturaTBX.Text);
+                  Conexion.AgregarConvenio(CodigoTXT.Text, descripcionTBX.Text, int.Parse(NumTBX.Text), int.Parse(AñoTXT.Text));
                     Limpiar();
-                    obraSocial_Load(sender, e);
+                    Convenio_Load(sender, e);
                 }
                 
-                catch (Exception) { MessageBox.Show("No se pudo agregar la categoría, revise los datos y reintente"); }
+                catch (Exception) { MessageBox.Show("No se pudo agregar el convenio, revise los datos y reintente"); }
             }
             else { MessageBox.Show("Revise los campos ingresados");}
         }
 
         private void Limpiar()
         {
-        
+            AñoTXT.Text = "";
             NumTBX.Text = "";
             descripcionTBX.Text = "";
-            abreviaturaTBX.Text = "";
+            CodigoTXT.Text = "";
         }
 
         private void ModificarBTN_Click(object sender, EventArgs e)
         {
-            if ( descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red && NumTBX.Text != "" && abreviaturaTBX.Text != "")
+            if (CodigoTXT.Text != "" && descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red && NumTBX.Text != "" && AñoTXT.ForeColor != System.Drawing.Color.Red && AñoTXT.Text != "")
             {
                 try
                 {
@@ -133,15 +134,15 @@ namespace Liquidacion
 
                     if (check == true)
                     {
-                        Conexion.ModificarObraSocial((int)Cuadro.Rows[n].Cells[1].Value,int.Parse(NumTBX.Text),descripcionTBX.Text,abreviaturaTBX.Text);
+                        Conexion.ModificarConvenio((int)Cuadro.Rows[n].Cells[1].Value, CodigoTXT.Text, descripcionTBX.Text, int.Parse(NumTBX.Text), int.Parse(AñoTXT.Text)); ;
                         Limpiar();
-                        obraSocial_Load(sender, e);
+                        Convenio_Load(sender, e);
                     }
 
 
                     else { MessageBox.Show("No hay ningun registro seleccionado"); }
                 }
-                catch (Exception) { MessageBox.Show("No se pudo modificar la categoría, revise los datos y reintente"); }
+                catch (Exception) { MessageBox.Show("No se pudo modificar la el convenio, revise los datos y reintente"); }
             }
             else { MessageBox.Show("Revise los campos ingresados"); }
         }
@@ -160,7 +161,7 @@ namespace Liquidacion
                 {
                     Cuadro.Rows[n].Cells[0].Value = false;
                     Limpiar();
-                    obraSocial_Load(sender, e);
+                    Convenio_Load(sender, e);
                 }
                 else
                 {
@@ -174,13 +175,14 @@ namespace Liquidacion
                         }
                         Cuadro.CurrentRow.DefaultCellStyle.BackColor = Color.Yellow;
                         Cuadro.Rows[n].Cells[0].Value = true;
-
-                        NumTBX.Text = ((int)Cuadro.Rows[n].Cells[2].Value).ToString();
+                        CodigoTXT.Text = (string)Cuadro.Rows[n].Cells[2].Value;
                         descripcionTBX.Text = (string)Cuadro.Rows[n].Cells[3].Value;
-                        abreviaturaTBX.Text = (string)Cuadro.Rows[n].Cells[4].Value;
+                        NumTBX.Text = ((int)Cuadro.Rows[n].Cells[4].Value).ToString();
+                        AñoTXT.Text = ((int)Cuadro.Rows[n].Cells[5].Value).ToString();
 
 
-                }
+
+                    }
                 catch (Exception) { }
 
 
@@ -206,9 +208,9 @@ namespace Liquidacion
 
                 if (check == true)
                 {
-                    Conexion.EliminarObraSocial((int)Cuadro.Rows[n].Cells[1].Value);
+                    Conexion.EliminarConvenio((int)Cuadro.Rows[n].Cells[1].Value);
                     Limpiar();
-                    obraSocial_Load(sender, e);
+                    Convenio_Load(sender, e);
                 }
 
 
@@ -219,10 +221,10 @@ namespace Liquidacion
 
         private void Buscar_Click(object sender, EventArgs e)
         {
-            BusquedaRapida selec = new BusquedaRapida("numero","descripcion","obraSocial");
+            BusquedaRapida selec = new BusquedaRapida("codigo","descripcion","Convenio");
             DialogResult resultado = selec.ShowDialog();
             int id = selec.IDBusqueda;
-            obraSocial_Load(sender, e);
+            Convenio_Load(sender, e);
             try
             {
                 for (int fila = 0; fila < Cuadro.Rows.Count; fila++)
@@ -233,7 +235,7 @@ namespace Liquidacion
                         Cuadro.Rows[fila].Cells[0].Value = true;
                         NumTBX.Text = ((int)Cuadro.Rows[fila].Cells[2].Value).ToString();
                         descripcionTBX.Text = (string)Cuadro.Rows[fila].Cells[3].Value;
-                        abreviaturaTBX.Text = (string)Cuadro.Rows[fila].Cells[4].Value;
+                        CodigoTXT.Text = (string)Cuadro.Rows[fila].Cells[4].Value;
                         Cuadro.CurrentCell = Cuadro.Rows[fila].Cells[0];
                         n = fila;
                     }
@@ -244,6 +246,18 @@ namespace Liquidacion
 
             }
             catch (Exception) { }
+        }
+
+        private void AñoTXT_TextChanged(object sender, EventArgs e)
+        {
+            int numero;
+            try
+            {
+                numero = int.Parse(NumTBX.Text);
+                AñoTXT.ForeColor = System.Drawing.Color.Black;
+            }
+            catch (Exception) { AñoTXT.ForeColor = System.Drawing.Color.Red; }
+
         }
     }
 }

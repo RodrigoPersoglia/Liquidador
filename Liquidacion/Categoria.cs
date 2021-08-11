@@ -21,24 +21,27 @@ namespace Liquidacion
 
         private void Categoria_Load(object sender, EventArgs e)
         {
-            string consulta5 = "select id, concat(numero,' - ', descripcion) as descripcion from tipocontrato tc order by tc.numero";
             MySqlConnection conectar = Conexion.ObtenerConexion();
-            MySqlDataReader reader;
+            
             conectar.Open();
+
             try
             {
-                MySqlCommand comand = new MySqlCommand(consulta5, conectar);
-                reader = comand.ExecuteReader();
-                DataTable dt = new DataTable();
-                dt.Load(reader);
-                DataRow newRow = dt.NewRow();
-                newRow["descripcion"] = "Seleccione";
-                dt.Rows.InsertAt(newRow, 0);
-                TipoContratoCBX.DataSource = dt;
-                TipoContratoCBX.DisplayMember = "descripcion";
-                TipoContratoCBX.ValueMember = "ID";
+                ConvenioCBX.DataSource = null;
+                ConvenioCBX.Items.Clear();
+                DataTable dt = Conexion.VerConvenio();
+                if (dt != null)
+                {
+                    DataRow newRow = dt.NewRow();
+                    newRow["convenio"] = "Seleccione";
+                    dt.Rows.InsertAt(newRow, 0);
+                    ConvenioCBX.DataSource = dt;
+                    ConvenioCBX.DisplayMember = "convenio";
+                    ConvenioCBX.ValueMember = "ID";
+                }
             }
-            catch (MySqlException ex) { MessageBox.Show("Error al buscar " + ex.Message); }
+            catch (Exception) { }
+            finally { conectar.Close(); }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -97,11 +100,11 @@ namespace Liquidacion
 
         private void Agregar_Click(object sender, EventArgs e)
         {
-            if (TipoContratoCBX.Text != "Seleccione" && descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red && importeTBX.ForeColor != System.Drawing.Color.Red && NumTBX.Text != "" && importeTBX.Text != "")
+            if (ConvenioCBX.Text!="Seleccione" && TipoContratoCBX.Text != "Seleccione" && descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red && importeTBX.ForeColor != System.Drawing.Color.Red && NumTBX.Text != "" && importeTBX.Text != "")
             {
                 try
                 {
-                    Conexion.AgregarCategoria(int.Parse(NumTBX.Text), descripcionTBX.Text, decimal.Parse(importeTBX.Text), (int)TipoContratoCBX.SelectedValue);
+                    Conexion.AgregarCategoria(int.Parse(NumTBX.Text), descripcionTBX.Text, decimal.Parse(importeTBX.Text), (int)TipoContratoCBX.SelectedValue,(int)ConvenioCBX.SelectedValue);
                     Limpiar();
                     TipoContratoCBX_SelectionChangeCommitted(sender, e);
                 }
@@ -119,7 +122,7 @@ namespace Liquidacion
 
         private void ModificarBTN_Click(object sender, EventArgs e)
         {
-            if (TipoContratoCBX.Text != "Seleccione" && descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red && importeTBX.ForeColor != System.Drawing.Color.Red && NumTBX.Text != "" && importeTBX.Text != "")
+            if (ConvenioCBX.Text != "Seleccione" && TipoContratoCBX.Text != "Seleccione" && descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red && importeTBX.ForeColor != System.Drawing.Color.Red && NumTBX.Text != "" && importeTBX.Text != "")
             {
                 try
                 {
@@ -134,7 +137,7 @@ namespace Liquidacion
 
                     if (check == true)
                     {
-                        Conexion.ModificarCategoria((int)Cuadro.Rows[n].Cells[1].Value,int.Parse(NumTBX.Text),descripcionTBX.Text,decimal.Parse(importeTBX.Text));
+                        Conexion.ModificarCategoria((int)Cuadro.Rows[n].Cells[1].Value,int.Parse(NumTBX.Text),descripcionTBX.Text,decimal.Parse(importeTBX.Text), (int)ConvenioCBX.SelectedValue);
                         Limpiar();
                         TipoContratoCBX_SelectionChangeCommitted(sender, e);
                     }
@@ -235,6 +238,34 @@ namespace Liquidacion
                 else { MessageBox.Show("No hay ningun registro seleccionado"); }
             }
             catch (Exception) { MessageBox.Show("No se pudo eliminar la categoría, revise los datos y reintente"); }
+        }
+
+        private void ConvenioCBX_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Cuadro.Rows.Clear();
+           try
+            {
+                int numero = (int)ConvenioCBX.SelectedValue;
+                string consulta5 = "select id, concat(numero,' - ', descripcion) as descripcion from tipocontrato tc where tc.convenio_ID=" + numero.ToString() + " order by tc.numero";
+                MySqlConnection conectar = Conexion.ObtenerConexion();
+                MySqlDataReader reader;
+                conectar.Open();
+                try
+                {
+                    MySqlCommand comand = new MySqlCommand(consulta5, conectar);
+                    reader = comand.ExecuteReader();
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+                    DataRow newRow = dt.NewRow();
+                    newRow["descripcion"] = "Seleccione";
+                    dt.Rows.InsertAt(newRow, 0);
+                    TipoContratoCBX.DataSource = dt;
+                    TipoContratoCBX.DisplayMember = "descripcion";
+                    TipoContratoCBX.ValueMember = "ID";
+                }
+                catch (MySqlException ex) { MessageBox.Show("Error al buscar " + ex.Message); }
+            }
+            catch (Exception) { Limpiar(); TipoContratoCBX.DataSource = null; }
         }
     }
 }

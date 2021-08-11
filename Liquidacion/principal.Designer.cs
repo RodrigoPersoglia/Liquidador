@@ -43,10 +43,11 @@ namespace Liquidacion
             this.datosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sucursalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.turnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.categoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.obraSocialToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.conceptosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.categoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.conveniosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,26 +81,26 @@ namespace Liquidacion
             // agregarToolStripMenuItem
             // 
             this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
-            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.agregarToolStripMenuItem.Text = "Agregar";
             this.agregarToolStripMenuItem.Click += new System.EventHandler(this.agregarToolStripMenuItem_Click);
             // 
             // modificarToolStripMenuItem
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.modificarToolStripMenuItem.Text = "Modificar";
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             // 
             // listadoToolStripMenuItem
             // 
             this.listadoToolStripMenuItem.Name = "listadoToolStripMenuItem";
-            this.listadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listadoToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.listadoToolStripMenuItem.Text = "Listado";
             // 
             // novedadesToolStripMenuItem
@@ -133,23 +134,35 @@ namespace Liquidacion
             // datosToolStripMenuItem
             // 
             this.datosToolStripMenuItem.Name = "datosToolStripMenuItem";
-            this.datosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.datosToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.datosToolStripMenuItem.Text = "Datos";
             this.datosToolStripMenuItem.Click += new System.EventHandler(this.datosToolStripMenuItem_Click);
             // 
             // sucursalesToolStripMenuItem
             // 
             this.sucursalesToolStripMenuItem.Name = "sucursalesToolStripMenuItem";
-            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.sucursalesToolStripMenuItem.Text = "Sucursales";
             this.sucursalesToolStripMenuItem.Click += new System.EventHandler(this.sucursalesToolStripMenuItem_Click);
             // 
             // turnosToolStripMenuItem
             // 
             this.turnosToolStripMenuItem.Name = "turnosToolStripMenuItem";
-            this.turnosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.turnosToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.turnosToolStripMenuItem.Text = "Turnos";
             this.turnosToolStripMenuItem.Click += new System.EventHandler(this.turnosToolStripMenuItem_Click);
+            // 
+            // categoriasToolStripMenuItem
+            // 
+            this.categoriasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editarToolStripMenuItem,
+            this.obraSocialToolStripMenuItem1,
+            this.conceptosToolStripMenuItem1,
+            this.conveniosToolStripMenuItem});
+            this.categoriasToolStripMenuItem.Name = "categoriasToolStripMenuItem";
+            this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(105, 20);
+            this.categoriasToolStripMenuItem.Text = "Tablas Auxiliares";
+            this.categoriasToolStripMenuItem.Click += new System.EventHandler(this.categoriasToolStripMenuItem_Click);
             // 
             // editarToolStripMenuItem
             // 
@@ -171,16 +184,12 @@ namespace Liquidacion
             this.conceptosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.conceptosToolStripMenuItem1.Text = "Conceptos";
             // 
-            // categoriasToolStripMenuItem
+            // conveniosToolStripMenuItem
             // 
-            this.categoriasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editarToolStripMenuItem,
-            this.obraSocialToolStripMenuItem1,
-            this.conceptosToolStripMenuItem1});
-            this.categoriasToolStripMenuItem.Name = "categoriasToolStripMenuItem";
-            this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(105, 20);
-            this.categoriasToolStripMenuItem.Text = "Tablas Auxiliares";
-            this.categoriasToolStripMenuItem.Click += new System.EventHandler(this.categoriasToolStripMenuItem_Click);
+            this.conveniosToolStripMenuItem.Name = "conveniosToolStripMenuItem";
+            this.conveniosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.conveniosToolStripMenuItem.Text = "Convenios";
+            this.conveniosToolStripMenuItem.Click += new System.EventHandler(this.conveniosToolStripMenuItem_Click);
             // 
             // Principal
             // 
@@ -223,6 +232,7 @@ namespace Liquidacion
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem obraSocialToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem conceptosToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem conveniosToolStripMenuItem;
     }
 }
 

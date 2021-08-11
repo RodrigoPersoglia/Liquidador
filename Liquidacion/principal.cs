@@ -78,5 +78,12 @@ namespace Liquidacion
             os.MdiParent = this;
             os.Show();
         }
+
+        private void conveniosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Convenio conv = new Convenio();
+            conv.MdiParent = this;
+            conv.Show();
+        }
     }
 }

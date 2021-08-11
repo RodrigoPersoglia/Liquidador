@@ -30,6 +30,8 @@ namespace Liquidacion
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label5 = new System.Windows.Forms.Label();
+            this.ConvenioCBX = new System.Windows.Forms.ComboBox();
             this.EliminarBTN = new System.Windows.Forms.Button();
             this.ModificarBTN = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -65,6 +67,8 @@ namespace Liquidacion
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.splitContainer1.Panel1.Controls.Add(this.label5);
+            this.splitContainer1.Panel1.Controls.Add(this.ConvenioCBX);
             this.splitContainer1.Panel1.Controls.Add(this.EliminarBTN);
             this.splitContainer1.Panel1.Controls.Add(this.ModificarBTN);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
@@ -84,8 +88,29 @@ namespace Liquidacion
             this.splitContainer1.Panel2.Controls.Add(this.Cuadro);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(444, 441);
-            this.splitContainer1.SplitterDistance = 142;
+            this.splitContainer1.SplitterDistance = 170;
             this.splitContainer1.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label5.Location = new System.Drawing.Point(49, 18);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(62, 15);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "Convenio:";
+            // 
+            // ConvenioCBX
+            // 
+            this.ConvenioCBX.FormattingEnabled = true;
+            this.ConvenioCBX.ItemHeight = 13;
+            this.ConvenioCBX.Location = new System.Drawing.Point(117, 15);
+            this.ConvenioCBX.Name = "ConvenioCBX";
+            this.ConvenioCBX.Size = new System.Drawing.Size(160, 21);
+            this.ConvenioCBX.TabIndex = 1;
+            this.ConvenioCBX.SelectionChangeCommitted += new System.EventHandler(this.ConvenioCBX_SelectionChangeCommitted);
             // 
             // EliminarBTN
             // 
@@ -112,7 +137,7 @@ namespace Liquidacion
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label4.Location = new System.Drawing.Point(50, 107);
+            this.label4.Location = new System.Drawing.Point(50, 137);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 15);
             this.label4.TabIndex = 23;
@@ -123,7 +148,7 @@ namespace Liquidacion
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.Location = new System.Drawing.Point(16, 25);
+            this.label1.Location = new System.Drawing.Point(16, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 15);
             this.label1.TabIndex = 24;
@@ -132,14 +157,14 @@ namespace Liquidacion
             // descripcionTBX
             // 
             this.descripcionTBX.BackColor = System.Drawing.SystemColors.Window;
-            this.descripcionTBX.Location = new System.Drawing.Point(116, 76);
+            this.descripcionTBX.Location = new System.Drawing.Point(116, 105);
             this.descripcionTBX.Name = "descripcionTBX";
             this.descripcionTBX.Size = new System.Drawing.Size(161, 20);
             this.descripcionTBX.TabIndex = 3;
             // 
             // importeTBX
             // 
-            this.importeTBX.Location = new System.Drawing.Point(116, 105);
+            this.importeTBX.Location = new System.Drawing.Point(116, 135);
             this.importeTBX.MaxLength = 15;
             this.importeTBX.Name = "importeTBX";
             this.importeTBX.Size = new System.Drawing.Size(100, 20);
@@ -150,7 +175,7 @@ namespace Liquidacion
             // 
             this.TipoContratoCBX.FormattingEnabled = true;
             this.TipoContratoCBX.ItemHeight = 13;
-            this.TipoContratoCBX.Location = new System.Drawing.Point(116, 23);
+            this.TipoContratoCBX.Location = new System.Drawing.Point(116, 45);
             this.TipoContratoCBX.Name = "TipoContratoCBX";
             this.TipoContratoCBX.Size = new System.Drawing.Size(160, 21);
             this.TipoContratoCBX.TabIndex = 1;
@@ -161,7 +186,7 @@ namespace Liquidacion
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label2.Location = new System.Drawing.Point(43, 78);
+            this.label2.Location = new System.Drawing.Point(33, 106);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 15);
             this.label2.TabIndex = 1;
@@ -180,7 +205,7 @@ namespace Liquidacion
             // NumTBX
             // 
             this.NumTBX.BackColor = System.Drawing.SystemColors.Window;
-            this.NumTBX.Location = new System.Drawing.Point(116, 50);
+            this.NumTBX.Location = new System.Drawing.Point(116, 75);
             this.NumTBX.MaxLength = 8;
             this.NumTBX.Name = "NumTBX";
             this.NumTBX.Size = new System.Drawing.Size(101, 20);
@@ -202,7 +227,7 @@ namespace Liquidacion
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label3.Location = new System.Drawing.Point(54, 52);
+            this.label3.Location = new System.Drawing.Point(49, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 15);
             this.label3.TabIndex = 2;
@@ -224,7 +249,7 @@ namespace Liquidacion
             this.Cuadro.Name = "Cuadro";
             this.Cuadro.ReadOnly = true;
             this.Cuadro.RowHeadersVisible = false;
-            this.Cuadro.Size = new System.Drawing.Size(444, 295);
+            this.Cuadro.Size = new System.Drawing.Size(444, 267);
             this.Cuadro.TabIndex = 0;
             this.Cuadro.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Cuadro_CellClick);
             // 
@@ -307,5 +332,7 @@ namespace Liquidacion
         private System.Windows.Forms.DataGridViewTextBoxColumn numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Importe;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox ConvenioCBX;
     }
 }

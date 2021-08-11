@@ -34,7 +34,7 @@ namespace Liquidacion
 		}
 
 
-        public static void AgregarCategoria(int numero, string descripcion, decimal importe, int tipoContrato)
+        public static void AgregarCategoria(int numero, string descripcion, decimal importe, int tipoContrato,int convenio_ID)
         {
             MySqlConnection conectar = Conexion.ObtenerConexion();
             conectar.Open();
@@ -46,7 +46,7 @@ namespace Liquidacion
                 comand.Parameters.AddWithValue("@p2", descripcion);
                 comand.Parameters.AddWithValue("@p3", importe);
                 comand.Parameters.AddWithValue("@p4", tipoContrato);
-               
+                comand.Parameters.AddWithValue("@p5", convenio_ID);
 
 
                 comand.ExecuteNonQuery();
@@ -56,7 +56,7 @@ namespace Liquidacion
             finally { conectar.Close(); }
         }
 
-        public static void ModificarCategoria(int ID,int numero, string descripcion, decimal importe)
+        public static void ModificarCategoria(int ID,int numero, string descripcion, decimal importe, int convenio_id)
         {
             MySqlConnection conectar = Conexion.ObtenerConexion();
             conectar.Open();
@@ -68,7 +68,8 @@ namespace Liquidacion
                 comand.Parameters.AddWithValue("@p1", numero);
                 comand.Parameters.AddWithValue("@p2", descripcion);
                 comand.Parameters.AddWithValue("@p3", importe);
-                
+                comand.Parameters.AddWithValue("@p4", convenio_id);
+
 
 
 
@@ -114,7 +115,7 @@ namespace Liquidacion
                 {
                     return dt;
                 }
-                else { MessageBox.Show("No hay conceptos ingresados "); return null; }
+                else { MessageBox.Show("No hay categorías ingresadas "); return null; }
 
             }
             catch (Exception ex) { MessageBox.Show("Error al buscar " + ex.Message); return null; }
@@ -130,7 +131,6 @@ namespace Liquidacion
             {
                 MySqlCommand comand = new MySqlCommand(" verObraSocial", conectar);
                 comand.CommandType = CommandType.StoredProcedure;
-                //comand.Parameters.AddWithValue("@p1", tipoContrato);
                 MySqlDataAdapter adp = new MySqlDataAdapter(comand);
                 adp.Fill(dt);
                 if (dt.Rows.Count > 0)
@@ -433,8 +433,87 @@ namespace Liquidacion
             finally { conectar.Close(); }
         }
 
+        public static DataTable VerConvenio()
+        {
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            conectar.Open();
+            DataTable dt = new DataTable();
+            try
+            {
+                MySqlCommand comand = new MySqlCommand(" VerConvenio", conectar);
+                comand.CommandType = CommandType.StoredProcedure;
+                MySqlDataAdapter adp = new MySqlDataAdapter(comand);
+                adp.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    return dt;
+                }
+                else { MessageBox.Show("No hay convenios ingresados "); return null; }
 
-       
+            }
+            catch (Exception ex) { MessageBox.Show("Error al buscar " + ex.Message); return null; }
+            finally { conectar.Close(); }
+        }
+
+        public static void AgregarConvenio(string codigo,string descripcion, int numero, int año)
+        {
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            conectar.Open();
+            try
+            {
+                MySqlCommand comand = new MySqlCommand("AgregarConvenio", conectar);
+                comand.CommandType = CommandType.StoredProcedure;
+                comand.Parameters.AddWithValue("@p1", codigo);
+                comand.Parameters.AddWithValue("@p2", descripcion);
+                comand.Parameters.AddWithValue("@p3", numero);
+                comand.Parameters.AddWithValue("@p4", año);
+                comand.ExecuteNonQuery();
+                MessageBox.Show("Convenio Agregado");
+            }
+            catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+            finally { conectar.Close(); }
+        }
+
+        public static void ModificarConvenio(int ID, string codigo, string descripcion, int numero, int año)
+        {
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            conectar.Open();
+            try
+            {
+                MySqlCommand comand = new MySqlCommand("ModificarConvenio", conectar);
+                comand.CommandType = CommandType.StoredProcedure;
+                comand.Parameters.AddWithValue("@p0", ID);
+                comand.Parameters.AddWithValue("@p1", codigo);
+                comand.Parameters.AddWithValue("@p2", descripcion);
+                comand.Parameters.AddWithValue("@p3", numero);
+                comand.Parameters.AddWithValue("@p4", año);
+                comand.ExecuteNonQuery();
+                MessageBox.Show("Convenio Modificado");
+            }
+            catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+            finally { conectar.Close(); }
+        }
+
+        public static void EliminarConvenio(int ID)
+        {
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            conectar.Open();
+            try
+            {
+                MySqlCommand comand = new MySqlCommand("EliminarConvenio", conectar);
+                comand.CommandType = CommandType.StoredProcedure;
+                comand.Parameters.AddWithValue("@p0", ID);
+
+
+                comand.ExecuteNonQuery();
+                MessageBox.Show("Convenio Eliminado");
+            }
+            catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+            finally { conectar.Close(); }
+        }
+
+
+
 
         //public static Cliente ObtenerCliente(string busqueda)
         //{
