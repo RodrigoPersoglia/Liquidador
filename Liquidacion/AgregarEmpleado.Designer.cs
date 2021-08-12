@@ -61,13 +61,18 @@ namespace Liquidacion
             this.apellidoTBX = new System.Windows.Forms.TextBox();
             this.nombreTBX = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.SueldoAcordadoTBX = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.ConvenioCBX = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.sucursalCBX = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.turnoCBX = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.obraSocialCBX = new System.Windows.Forms.ComboBox();
-            this.tipoCobtratoCBX = new System.Windows.Forms.ComboBox();
+            this.tipoContratoCBX = new System.Windows.Forms.ComboBox();
             this.meseAnterioresTBX = new System.Windows.Forms.TextBox();
             this.categoriaCBX = new System.Windows.Forms.ComboBox();
             this.legajoTBX = new System.Windows.Forms.TextBox();
@@ -173,7 +178,7 @@ namespace Liquidacion
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label9.Location = new System.Drawing.Point(65, 114);
+            this.label9.Location = new System.Drawing.Point(62, 175);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(63, 15);
             this.label9.TabIndex = 8;
@@ -184,7 +189,7 @@ namespace Liquidacion
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label10.Location = new System.Drawing.Point(22, 145);
+            this.label10.Location = new System.Drawing.Point(21, 203);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(106, 15);
             this.label10.TabIndex = 9;
@@ -206,7 +211,7 @@ namespace Liquidacion
             this.button2.Location = new System.Drawing.Point(502, 8);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 23;
+            this.button2.TabIndex = 26;
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -216,9 +221,10 @@ namespace Liquidacion
             this.button1.Location = new System.Drawing.Point(417, 8);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 22;
+            this.button1.TabIndex = 25;
             this.button1.Text = "Aceptar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -256,6 +262,7 @@ namespace Liquidacion
             // LocalidadTBX
             // 
             this.LocalidadTBX.Location = new System.Drawing.Point(114, 203);
+            this.LocalidadTBX.MaxLength = 45;
             this.LocalidadTBX.Name = "LocalidadTBX";
             this.LocalidadTBX.Size = new System.Drawing.Size(161, 20);
             this.LocalidadTBX.TabIndex = 9;
@@ -287,10 +294,10 @@ namespace Liquidacion
             // CelularTBX
             // 
             this.CelularTBX.Location = new System.Drawing.Point(113, 323);
+            this.CelularTBX.MaxLength = 45;
             this.CelularTBX.Name = "CelularTBX";
             this.CelularTBX.Size = new System.Drawing.Size(161, 20);
             this.CelularTBX.TabIndex = 13;
-            this.CelularTBX.TextChanged += new System.EventHandler(this.CelularTBX_TextChanged);
             // 
             // label14
             // 
@@ -306,10 +313,10 @@ namespace Liquidacion
             // telefonoTBX
             // 
             this.telefonoTBX.Location = new System.Drawing.Point(113, 293);
+            this.telefonoTBX.MaxLength = 45;
             this.telefonoTBX.Name = "telefonoTBX";
             this.telefonoTBX.Size = new System.Drawing.Size(161, 20);
             this.telefonoTBX.TabIndex = 12;
-            this.telefonoTBX.TextChanged += new System.EventHandler(this.telefonoTBX_TextChanged);
             // 
             // label13
             // 
@@ -372,11 +379,12 @@ namespace Liquidacion
             this.ProvinciaCBX.Location = new System.Drawing.Point(114, 233);
             this.ProvinciaCBX.Name = "ProvinciaCBX";
             this.ProvinciaCBX.Size = new System.Drawing.Size(160, 21);
-            this.ProvinciaCBX.TabIndex = 14;
+            this.ProvinciaCBX.TabIndex = 10;
             // 
             // direccionTBX
             // 
             this.direccionTBX.Location = new System.Drawing.Point(114, 173);
+            this.direccionTBX.MaxLength = 45;
             this.direccionTBX.Name = "direccionTBX";
             this.direccionTBX.Size = new System.Drawing.Size(161, 20);
             this.direccionTBX.TabIndex = 8;
@@ -422,6 +430,7 @@ namespace Liquidacion
             // 
             this.apellidoTBX.BackColor = System.Drawing.SystemColors.Window;
             this.apellidoTBX.Location = new System.Drawing.Point(114, 83);
+            this.apellidoTBX.MaxLength = 100;
             this.apellidoTBX.Name = "apellidoTBX";
             this.apellidoTBX.Size = new System.Drawing.Size(161, 20);
             this.apellidoTBX.TabIndex = 2;
@@ -430,6 +439,7 @@ namespace Liquidacion
             // 
             this.nombreTBX.BackColor = System.Drawing.SystemColors.Window;
             this.nombreTBX.Location = new System.Drawing.Point(114, 53);
+            this.nombreTBX.MaxLength = 100;
             this.nombreTBX.Name = "nombreTBX";
             this.nombreTBX.Size = new System.Drawing.Size(161, 20);
             this.nombreTBX.TabIndex = 1;
@@ -437,13 +447,18 @@ namespace Liquidacion
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel3.Controls.Add(this.checkBox1);
+            this.panel3.Controls.Add(this.SueldoAcordadoTBX);
+            this.panel3.Controls.Add(this.label22);
+            this.panel3.Controls.Add(this.ConvenioCBX);
+            this.panel3.Controls.Add(this.label21);
             this.panel3.Controls.Add(this.label20);
             this.panel3.Controls.Add(this.sucursalCBX);
             this.panel3.Controls.Add(this.label19);
             this.panel3.Controls.Add(this.turnoCBX);
             this.panel3.Controls.Add(this.label18);
             this.panel3.Controls.Add(this.obraSocialCBX);
-            this.panel3.Controls.Add(this.tipoCobtratoCBX);
+            this.panel3.Controls.Add(this.tipoContratoCBX);
             this.panel3.Controls.Add(this.meseAnterioresTBX);
             this.panel3.Controls.Add(this.categoriaCBX);
             this.panel3.Controls.Add(this.legajoTBX);
@@ -460,6 +475,62 @@ namespace Liquidacion
             this.panel3.Size = new System.Drawing.Size(325, 386);
             this.panel3.TabIndex = 12;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(132, 326);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(124, 17);
+            this.checkBox1.TabIndex = 23;
+            this.checkBox1.Text = "Sueldo por convenio";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // SueldoAcordadoTBX
+            // 
+            this.SueldoAcordadoTBX.BackColor = System.Drawing.SystemColors.Window;
+            this.SueldoAcordadoTBX.Enabled = false;
+            this.SueldoAcordadoTBX.Location = new System.Drawing.Point(131, 348);
+            this.SueldoAcordadoTBX.MaxLength = 32;
+            this.SueldoAcordadoTBX.Name = "SueldoAcordadoTBX";
+            this.SueldoAcordadoTBX.Size = new System.Drawing.Size(161, 20);
+            this.SueldoAcordadoTBX.TabIndex = 24;
+            this.SueldoAcordadoTBX.TextChanged += new System.EventHandler(this.SueldoAcordadoTBX_TextChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label22.Location = new System.Drawing.Point(19, 350);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(103, 15);
+            this.label22.TabIndex = 34;
+            this.label22.Text = "Sueldo Acordado:";
+            // 
+            // ConvenioCBX
+            // 
+            this.ConvenioCBX.FormattingEnabled = true;
+            this.ConvenioCBX.ItemHeight = 13;
+            this.ConvenioCBX.Location = new System.Drawing.Point(133, 113);
+            this.ConvenioCBX.Name = "ConvenioCBX";
+            this.ConvenioCBX.Size = new System.Drawing.Size(160, 21);
+            this.ConvenioCBX.TabIndex = 16;
+            this.ConvenioCBX.SelectionChangeCommitted += new System.EventHandler(this.ConvenioCBX_SelectionChangeCommitted);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label21.Location = new System.Drawing.Point(63, 114);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(62, 15);
+            this.label21.TabIndex = 32;
+            this.label21.Text = "Convenio:";
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -475,17 +546,17 @@ namespace Liquidacion
             // 
             this.sucursalCBX.FormattingEnabled = true;
             this.sucursalCBX.ItemHeight = 13;
-            this.sucursalCBX.Location = new System.Drawing.Point(133, 261);
+            this.sucursalCBX.Location = new System.Drawing.Point(132, 288);
             this.sucursalCBX.Name = "sucursalCBX";
             this.sucursalCBX.Size = new System.Drawing.Size(160, 21);
-            this.sucursalCBX.TabIndex = 31;
+            this.sucursalCBX.TabIndex = 22;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label19.Location = new System.Drawing.Point(69, 263);
+            this.label19.Location = new System.Drawing.Point(68, 290);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(55, 15);
             this.label19.TabIndex = 30;
@@ -495,17 +566,17 @@ namespace Liquidacion
             // 
             this.turnoCBX.FormattingEnabled = true;
             this.turnoCBX.ItemHeight = 13;
-            this.turnoCBX.Location = new System.Drawing.Point(133, 233);
+            this.turnoCBX.Location = new System.Drawing.Point(132, 260);
             this.turnoCBX.Name = "turnoCBX";
             this.turnoCBX.Size = new System.Drawing.Size(160, 21);
-            this.turnoCBX.TabIndex = 29;
+            this.turnoCBX.TabIndex = 21;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label18.Location = new System.Drawing.Point(82, 233);
+            this.label18.Location = new System.Drawing.Point(81, 260);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(42, 15);
             this.label18.TabIndex = 28;
@@ -515,46 +586,50 @@ namespace Liquidacion
             // 
             this.obraSocialCBX.FormattingEnabled = true;
             this.obraSocialCBX.ItemHeight = 13;
-            this.obraSocialCBX.Location = new System.Drawing.Point(134, 203);
+            this.obraSocialCBX.Location = new System.Drawing.Point(133, 230);
             this.obraSocialCBX.Name = "obraSocialCBX";
             this.obraSocialCBX.Size = new System.Drawing.Size(160, 21);
-            this.obraSocialCBX.TabIndex = 27;
+            this.obraSocialCBX.TabIndex = 20;
             // 
-            // tipoCobtratoCBX
+            // tipoContratoCBX
             // 
-            this.tipoCobtratoCBX.FormattingEnabled = true;
-            this.tipoCobtratoCBX.ItemHeight = 13;
-            this.tipoCobtratoCBX.Location = new System.Drawing.Point(133, 173);
-            this.tipoCobtratoCBX.Name = "tipoCobtratoCBX";
-            this.tipoCobtratoCBX.Size = new System.Drawing.Size(160, 21);
-            this.tipoCobtratoCBX.TabIndex = 26;
+            this.tipoContratoCBX.FormattingEnabled = true;
+            this.tipoContratoCBX.ItemHeight = 13;
+            this.tipoContratoCBX.Location = new System.Drawing.Point(133, 143);
+            this.tipoContratoCBX.Name = "tipoContratoCBX";
+            this.tipoContratoCBX.Size = new System.Drawing.Size(160, 21);
+            this.tipoContratoCBX.TabIndex = 19;
+            this.tipoContratoCBX.SelectionChangeCommitted += new System.EventHandler(this.tipoContratoCBX_SelectionChangeCommitted);
             // 
             // meseAnterioresTBX
             // 
             this.meseAnterioresTBX.BackColor = System.Drawing.SystemColors.Window;
-            this.meseAnterioresTBX.Location = new System.Drawing.Point(134, 143);
+            this.meseAnterioresTBX.Location = new System.Drawing.Point(134, 201);
             this.meseAnterioresTBX.MaxLength = 3;
             this.meseAnterioresTBX.Name = "meseAnterioresTBX";
             this.meseAnterioresTBX.Size = new System.Drawing.Size(161, 20);
-            this.meseAnterioresTBX.TabIndex = 17;
+            this.meseAnterioresTBX.TabIndex = 18;
+            this.meseAnterioresTBX.Text = "0";
             this.meseAnterioresTBX.TextChanged += new System.EventHandler(this.meseAnterioresTBX_TextChanged);
             // 
             // categoriaCBX
             // 
             this.categoriaCBX.FormattingEnabled = true;
             this.categoriaCBX.ItemHeight = 13;
-            this.categoriaCBX.Location = new System.Drawing.Point(134, 112);
+            this.categoriaCBX.Location = new System.Drawing.Point(134, 170);
             this.categoriaCBX.Name = "categoriaCBX";
             this.categoriaCBX.Size = new System.Drawing.Size(160, 21);
-            this.categoriaCBX.TabIndex = 24;
+            this.categoriaCBX.TabIndex = 17;
             // 
             // legajoTBX
             // 
             this.legajoTBX.BackColor = System.Drawing.SystemColors.Window;
             this.legajoTBX.Location = new System.Drawing.Point(133, 53);
+            this.legajoTBX.MaxLength = 30;
             this.legajoTBX.Name = "legajoTBX";
             this.legajoTBX.Size = new System.Drawing.Size(161, 20);
             this.legajoTBX.TabIndex = 14;
+            this.legajoTBX.TextChanged += new System.EventHandler(this.legajoTBX_TextChanged);
             // 
             // fechaIngresoDTP
             // 
@@ -568,7 +643,7 @@ namespace Liquidacion
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label17.Location = new System.Drawing.Point(57, 205);
+            this.label17.Location = new System.Drawing.Point(56, 232);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(71, 15);
             this.label17.TabIndex = 12;
@@ -579,7 +654,7 @@ namespace Liquidacion
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label16.Location = new System.Drawing.Point(27, 175);
+            this.label16.Location = new System.Drawing.Point(27, 145);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(101, 15);
             this.label16.TabIndex = 11;
@@ -655,7 +730,7 @@ namespace Liquidacion
         private System.Windows.Forms.TextBox LocalidadTBX;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox obraSocialCBX;
-        private System.Windows.Forms.ComboBox tipoCobtratoCBX;
+        private System.Windows.Forms.ComboBox tipoContratoCBX;
         private System.Windows.Forms.TextBox meseAnterioresTBX;
         private System.Windows.Forms.ComboBox categoriaCBX;
         private System.Windows.Forms.TextBox legajoTBX;
@@ -667,5 +742,10 @@ namespace Liquidacion
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox turnoCBX;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox SueldoAcordadoTBX;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox ConvenioCBX;
+        private System.Windows.Forms.Label label21;
     }
 }

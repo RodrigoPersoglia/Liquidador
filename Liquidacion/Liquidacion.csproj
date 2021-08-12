@@ -86,6 +86,7 @@
     <Compile Include="Empresa.designer.cs">
       <DependentUpon>Empresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExisteException.cs" />
     <Compile Include="obraSocial.cs">
       <SubType>Form</SubType>
     </Compile>
