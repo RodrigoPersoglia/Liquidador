@@ -62,6 +62,7 @@ C:\Users\usuario\Desktop\Liquidacion\Liquidacion\obj\Debug\Liquidacion.obraSocia
 C:\Users\usuario\Desktop\Liquidacion\Liquidacion\obj\Debug\Liquidacion.Turno.resources
 C:\Users\usuario\Desktop\Liquidacion\Liquidacion\obj\Debug\Liquidacion.Sucursal.resources
 C:\Users\usuario\Desktop\Liquidacion\Liquidacion\obj\Debug\Liquidacion.Empresa.resources
-C:\Users\usuario\Desktop\Liquidacion\Liquidacion\obj\Debug\Liquidacion.BusquedaobraSocial.resources
 C:\Users\usuario\Desktop\Liquidacion\Liquidacion\obj\Debug\Liquidacion.BusquedaRapida.resources
 C:\Users\usuario\Desktop\Liquidacion\Liquidacion\obj\Debug\Liquidacion.Convenio.resources
+C:\Users\usuario\Desktop\Liquidacion\Liquidacion\obj\Debug\Liquidacion.ModificarEmpleado.resources
+C:\Users\usuario\Desktop\Liquidacion\Liquidacion\obj\Debug\Liquidacion.Concepto.resources

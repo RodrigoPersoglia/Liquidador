@@ -11,14 +11,16 @@ using MySql.Data.MySqlClient;
 
 namespace Liquidacion
 {
-    public partial class AgregarEmpleado : Form
+    public partial class ModificarEmpleado : Form
     {
-        public AgregarEmpleado()
+        public ModificarEmpleado()
         {
             InitializeComponent();
         }
+        private int ID = 0;
+        private string numLegajo = null;
 
-        private void AgregarEmpleado_Load(object sender, EventArgs e)
+        private void ModificarEmpleado_Load(object sender, EventArgs e)
         {
             tipoDocCBX.Text = "DNI";
             ProvinciaCBX.Text = "Seleccione";
@@ -177,7 +179,7 @@ namespace Liquidacion
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             //Habilita o deshabilita el textbox de Sueldo acordado
-            if (checkBox1.Checked == true) { SueldoAcordadoTBX.Enabled = false; }
+            if (checkBox1.Checked == true) { SueldoAcordadoTBX.Enabled = false; SueldoAcordadoTBX.Text = ""; }
             else { SueldoAcordadoTBX.Enabled = true; }
         }
 
@@ -264,12 +266,13 @@ namespace Liquidacion
 
         private void Limpiar()
         {
+            ID = 0;
             nombreTBX.Text = "";
             apellidoTBX.Text = "";
+            NumDocTBX.Text = "";
             cuil1TBX.Text = "";
             cuil2TBX.Text = "";
             cuil3TBX.Text = "";
-            NumDocTBX.Text = "";
             direccionTBX.Text = "";
             LocalidadTBX.Text = "";
             ProvinciaCBX.Text = "Seleccione";
@@ -287,6 +290,7 @@ namespace Liquidacion
             categoriaCBX.DataSource = null; categoriaCBX.Items.Clear();
             checkBox1.Checked = true;
             SueldoAcordadoTBX.Text = "";
+            checkBox2.Checked = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -298,7 +302,7 @@ namespace Liquidacion
             if (checkBox1.Checked == false && SueldoAcordadoTBX.Text!="" && SueldoAcordadoTBX.ForeColor!= Color.Red) { Acordado = decimal.Parse(SueldoAcordadoTBX.Text); }
             try
             {
-                if (legajoTBX.ForeColor != Color.Red && legajoTBX.Text != "" && nombreTBX.Text != "" && apellidoTBX.Text != "" && NumDocTBX.ForeColor != Color.Red && NumDocTBX.Text != ""
+                if (numLegajo!= null && ID!=0 && legajoTBX.ForeColor != Color.Red && legajoTBX.Text != "" && nombreTBX.Text != "" && apellidoTBX.Text != "" && NumDocTBX.ForeColor != Color.Red && NumDocTBX.Text != ""
                     && cuil1TBX.ForeColor != Color.Red && cuil1TBX.Text != "" && cuil2TBX.ForeColor != Color.Red && cuil2TBX.Text != "" && cuil3TBX.ForeColor != Color.Red && cuil3TBX.Text != "" && direccionTBX.Text != "" && LocalidadTBX.Text != ""
                     && ProvinciaCBX.Text != "Seleccione" && telefonoTBX.Text != "" && CelularTBX.Text != ""
                     && meseAnterioresTBX.ForeColor != Color.Red && meseAnterioresTBX.Text != "" && tipoContratoCBX.Text != "" && categoriaCBX.Text != ""
@@ -314,11 +318,18 @@ namespace Liquidacion
                     dt.Load(reader);
                     if (dt.Rows.Count > 0)
                     {
-                        throw new ExisteException();
+
+                        // Si el numero de legajo existe, tiene que ser el mismo que tenia asignado anteriormente, caso contrario lanzo la excepcion.
+                        foreach (DataRow x in dt.Rows)
+                        {
+                            if (int.Parse(numLegajo) != (int)x[1])
+
+                                throw new ExisteException();
+                        }
                     }
 
 
-                    Conexion.AgregarEmpleado(int.Parse(legajoTBX.Text), nombreTBX.Text, apellidoTBX.Text, tipoDocCBX.Text, int.Parse(NumDocTBX.Text),
+                    Conexion.ModificarEmpleado(ID,int.Parse(legajoTBX.Text), nombreTBX.Text, apellidoTBX.Text, tipoDocCBX.Text, int.Parse(NumDocTBX.Text),
                         int.Parse(cuil1TBX.Text), int.Parse(cuil2TBX.Text), int.Parse(cuil3TBX.Text), direccionTBX.Text, LocalidadTBX.Text, ProvinciaCBX.Text,
                         fechaNacDTP.Value, telefonoTBX.Text, CelularTBX.Text, fechaIngresoDTP.Value, int.Parse(meseAnterioresTBX.Text), true, Acordado,
                         (int)turnoCBX.SelectedValue, (int)obraSocialCBX.SelectedValue, (int)tipoContratoCBX.SelectedValue, (int)categoriaCBX.SelectedValue, (int)sucursalCBX.SelectedValue, (int)ConvenioCBX.SelectedValue);
@@ -344,6 +355,85 @@ namespace Liquidacion
             }
             catch (Exception) { legajoTBX.ForeColor = System.Drawing.Color.Red; }
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            numLegajo = null;
+            ID = 0;
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            MySqlDataReader reader;
+            conectar.Open();
+            try
+            {
+                BusquedaRapida selec = new BusquedaRapida("legajo","nombre", "apellido", "empleado");
+                DialogResult resultado = selec.ShowDialog();
+                int id = selec.IDBusqueda;
+
+                string consulta5 = "select * from empleado e where e.ID =" + id.ToString()+" limit 1";
+
+                MySqlCommand comand = new MySqlCommand(consulta5, conectar);
+                reader = comand.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                if (dt.Rows.Count == 0)
+                {
+                    throw new ExisteException();
+                }
+
+                if (dt.Rows.Count == 1)
+                {
+                    //Usar clase empleado
+                    foreach (DataRow x in dt.Rows)
+                    {
+                        
+                        
+                        ID = (int)x[0];
+                        numLegajo = ((int)x[1]).ToString();
+                        legajoTBX.Text = ((int)x[1]).ToString();
+                        nombreTBX.Text = (string)x[2];
+                        apellidoTBX.Text = (string)x[3];
+                        tipoDocCBX.Text = (string)x[4];
+                    NumDocTBX.Text = ((int)x[5]).ToString();
+                    cuil1TBX.Text = ((int)x[6]).ToString();
+                    cuil2TBX.Text = ((int)x[7]).ToString();
+                    cuil3TBX.Text = ((int)x[8]).ToString();
+                    direccionTBX.Text = (string)x[9];
+                    LocalidadTBX.Text = (string)x[10];
+                    ProvinciaCBX.Text = (string)x[11];
+                    fechaNacDTP.Value = (DateTime)x[12];
+                    telefonoTBX.Text = (string)x[13];
+                    CelularTBX.Text = (string)x[14];
+                    fechaIngresoDTP.Value = (DateTime)x[15];
+                    meseAnterioresTBX.Text = ((int)x[16]).ToString();
+                    //tipoDocCBX.Text = (string)x[17]; // Por ahora no los necesito
+                    //tipoDocCBX.Text = (string)x[18];
+                    if ((decimal)x[19] == 0){ checkBox1.Checked = true; SueldoAcordadoTBX.Text = ""; }
+                    else { checkBox1.Checked = false; SueldoAcordadoTBX.Text = ((decimal)x[19]).ToString();  }
+                    turnoCBX.SelectedValue = (int)x[20];
+                    obraSocialCBX.SelectedValue = (int)x[21];
+                    sucursalCBX.SelectedValue = (int)x[24];
+                    ConvenioCBX.SelectedValue = (int)x[25];
+                        ConvenioCBX_SelectionChangeCommitted(sender,e);
+                        tipoContratoCBX.SelectedValue = (int)x[22];
+                        tipoContratoCBX_SelectionChangeCommitted(sender, e);
+                        categoriaCBX.SelectedValue = (int)x[23];
+
+
+
+                    }
+                }
+        }
+            catch (ExisteException) { MessageBox.Show("No se ha seleccionado a ningún empleado");ID = 0; }
+            catch (Exception ex) { MessageBox.Show("Se produjo el siguiente error: " + ex.Message); }
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            //Habilita o deshabilita el textbox de Sueldo acordado
+            if (checkBox2.Checked == true) { legajoTBX.Enabled = false; }
+            else { legajoTBX.Enabled = true; }
         }
     }
 }

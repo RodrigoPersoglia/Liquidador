@@ -30,6 +30,7 @@ namespace Liquidacion
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.Campo2Chek = new System.Windows.Forms.CheckBox();
             this.Buscar = new System.Windows.Forms.Button();
             this.BusquedaTBX = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,7 +41,7 @@ namespace Liquidacion
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Campo2Chek = new System.Windows.Forms.CheckBox();
+            this.Campo3Chek = new System.Windows.Forms.CheckBox();
             this.Campo1Chek = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -59,6 +60,7 @@ namespace Liquidacion
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.splitContainer1.Panel1.Controls.Add(this.Campo3Chek);
             this.splitContainer1.Panel1.Controls.Add(this.Campo1Chek);
             this.splitContainer1.Panel1.Controls.Add(this.Campo2Chek);
             this.splitContainer1.Panel1.Controls.Add(this.Buscar);
@@ -73,6 +75,19 @@ namespace Liquidacion
             this.splitContainer1.Size = new System.Drawing.Size(444, 441);
             this.splitContainer1.SplitterDistance = 90;
             this.splitContainer1.TabIndex = 12;
+            // 
+            // Campo2Chek
+            // 
+            this.Campo2Chek.AutoCheck = false;
+            this.Campo2Chek.AutoSize = true;
+            this.Campo2Chek.Checked = true;
+            this.Campo2Chek.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.Campo2Chek.Location = new System.Drawing.Point(84, 64);
+            this.Campo2Chek.Name = "Campo2Chek";
+            this.Campo2Chek.Size = new System.Drawing.Size(67, 17);
+            this.Campo2Chek.TabIndex = 9;
+            this.Campo2Chek.Text = "campo 2";
+            this.Campo2Chek.UseVisualStyleBackColor = true;
             // 
             // Buscar
             // 
@@ -173,18 +188,19 @@ namespace Liquidacion
             this.Descripcion.ReadOnly = true;
             this.Descripcion.Width = 350;
             // 
-            // Campo2Chek
+            // Campo3Chek
             // 
-            this.Campo2Chek.AutoCheck = false;
-            this.Campo2Chek.AutoSize = true;
-            this.Campo2Chek.Checked = true;
-            this.Campo2Chek.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Campo2Chek.Location = new System.Drawing.Point(84, 64);
-            this.Campo2Chek.Name = "Campo2Chek";
-            this.Campo2Chek.Size = new System.Drawing.Size(67, 17);
-            this.Campo2Chek.TabIndex = 9;
-            this.Campo2Chek.Text = "campo 2";
-            this.Campo2Chek.UseVisualStyleBackColor = true;
+            this.Campo3Chek.AutoCheck = false;
+            this.Campo3Chek.AutoSize = true;
+            this.Campo3Chek.Checked = true;
+            this.Campo3Chek.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.Campo3Chek.Location = new System.Drawing.Point(206, 43);
+            this.Campo3Chek.Name = "Campo3Chek";
+            this.Campo3Chek.Size = new System.Drawing.Size(67, 17);
+            this.Campo3Chek.TabIndex = 11;
+            this.Campo3Chek.Text = "campo 3";
+            this.Campo3Chek.UseVisualStyleBackColor = true;
+            this.Campo3Chek.Visible = false;
             // 
             // Campo1Chek
             // 
@@ -237,6 +253,7 @@ namespace Liquidacion
         private System.Windows.Forms.DataGridViewTextBoxColumn numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.CheckBox Campo2Chek;
+        private System.Windows.Forms.CheckBox Campo3Chek;
         private System.Windows.Forms.CheckBox Campo1Chek;
     }
 }

@@ -85,5 +85,19 @@ namespace Liquidacion
             conv.MdiParent = this;
             conv.Show();
         }
+
+        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ModificarEmpleado mod = new ModificarEmpleado();
+            mod.MdiParent = this;
+            mod.Show();
+        }
+
+        private void conceptosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Concepto concepto = new Concepto();
+            concepto.MdiParent = this;
+            concepto.Show();
+        }
     }
 }

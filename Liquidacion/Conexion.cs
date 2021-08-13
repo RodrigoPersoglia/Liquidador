@@ -560,6 +560,54 @@ namespace Liquidacion
         }
 
 
+        public static void ModificarEmpleado(int id,int legajo, string nombre, string apellido, string tipoDNI, int DNI,
+           int cuit1, int cuit2, int cuit3, string direccion, string localidad,
+           string provincia, DateTime fechaNacimiento, string telefono, string celular, DateTime fechaIngreso,
+           int mesesAnteriores, bool activo, decimal sueldoAcordado, int turnoID,
+           int obraSocialID, int tipoContratoID, int categoriaID, int sucursalID, int convenioID)
+        {
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            conectar.Open();
+            try
+            {
+                MySqlCommand comand = new MySqlCommand("ModificarEmpleado", conectar);
+                comand.CommandType = CommandType.StoredProcedure;
+                comand.Parameters.AddWithValue("@p0", id);
+                comand.Parameters.AddWithValue("@p1", legajo);
+                comand.Parameters.AddWithValue("@p2", nombre);
+                comand.Parameters.AddWithValue("@p3", apellido);
+                comand.Parameters.AddWithValue("@p4", tipoDNI);
+                comand.Parameters.AddWithValue("@p5", DNI);
+                comand.Parameters.AddWithValue("@p6", cuit1);
+                comand.Parameters.AddWithValue("@p7", cuit2);
+                comand.Parameters.AddWithValue("@p8", cuit3);
+                comand.Parameters.AddWithValue("@p9", direccion);
+                comand.Parameters.AddWithValue("@p10", localidad);
+                comand.Parameters.AddWithValue("@p11", provincia);
+                comand.Parameters.AddWithValue("@p12", fechaNacimiento);
+                comand.Parameters.AddWithValue("@p13", telefono);
+                comand.Parameters.AddWithValue("@p14", celular);
+                comand.Parameters.AddWithValue("@p15", fechaIngreso);
+                comand.Parameters.AddWithValue("@p16", mesesAnteriores);
+                comand.Parameters.AddWithValue("@p17", activo);
+                //comand.Parameters.AddWithValue("@p18", fechaBaja);
+                comand.Parameters.AddWithValue("@p18", null);
+                comand.Parameters.AddWithValue("@p19", sueldoAcordado);
+                comand.Parameters.AddWithValue("@p20", turnoID);
+                comand.Parameters.AddWithValue("@p21", obraSocialID);
+                comand.Parameters.AddWithValue("@p22", tipoContratoID);
+                comand.Parameters.AddWithValue("@p23", categoriaID);
+                comand.Parameters.AddWithValue("@p24", sucursalID);
+                comand.Parameters.AddWithValue("@p25", convenioID);
+
+                comand.ExecuteNonQuery();
+                MessageBox.Show("Datos del empleado actualizados");
+            }
+            catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+            finally { conectar.Close(); }
+        }
+
+
 
 
 
