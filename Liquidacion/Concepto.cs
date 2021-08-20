@@ -21,8 +21,8 @@ namespace Liquidacion
 
         private void Concepto_Load(object sender, EventArgs e)
         {
-            //MySqlConnection conectar = Conexion.ObtenerConexion();
-            //conectar.Open();
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            conectar.Open();
             //try
             //{
             //    //completo el cuadro
@@ -38,14 +38,79 @@ namespace Liquidacion
             //            Cuadro.Rows[n].Cells[1].Value = (int)x[0];
             //            Cuadro.Rows[n].Cells[2].Value = (int)x[1];
             //            Cuadro.Rows[n].Cells[3].Value = (string)x[2];
-            //            Cuadro.Rows[n].Cells[4].Value = (string)x[3];
+            //            Cuadro.Rows[n].Cells[4].Value = (int)x[3];
+            //            Cuadro.Rows[n].Cells[5].Value = (decimal)x[4];
+            //            Cuadro.Rows[n].Cells[6].Value = (decimal)x[5];
+            //            Cuadro.Rows[n].Cells[7].Value = (string)x[9];
+            //            Cuadro.Rows[n].Cells[8].Value = (int)x[7];
+            //            Cuadro.Rows[n].Cells[9].Value = (int)x[8];
+            //            Cuadro.Rows[n].Cells[10].Value = (string)x[6];
+
 
             //        }
             //    }
 
             //}
             //catch (MySqlException ex) { MessageBox.Show("Error al buscar " + ex.Message); }
-            //finally { conectar.Close();}
+
+
+            try
+            {
+                ConvenioCBX.DataSource = null;
+                ConvenioCBX.Items.Clear();
+                DataTable dt = Conexion.VerConvenio();
+                if (dt != null)
+                {
+                    DataRow newRow = dt.NewRow();
+                    newRow["convenio"] = "Seleccione";
+                    dt.Rows.InsertAt(newRow, 0);
+                    ConvenioCBX.DataSource = dt;
+                    ConvenioCBX.DisplayMember = "convenio";
+                    ConvenioCBX.ValueMember = "ID";
+                }
+            }
+            catch (Exception) { }
+
+            // COMBOBOX TIPO CONTRATO
+            MySqlDataReader reader;
+            string consulta = "Select ID,descripcion From tipoConcepto a order by a.ID";
+            try
+            {
+                TipoConceptoCBX.DataSource = null;
+                TipoConceptoCBX.Items.Clear();
+                MySqlCommand comand = new MySqlCommand(consulta, conectar);
+                reader = comand.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                DataRow newRow = dt.NewRow();
+                newRow["descripcion"] = "Seleccione";
+                dt.Rows.InsertAt(newRow, 0);
+                TipoConceptoCBX.DataSource = dt;
+                TipoConceptoCBX.DisplayMember = "descripcion";
+                TipoConceptoCBX.ValueMember = "ID";
+            }
+            catch (MySqlException ex) { MessageBox.Show("Error al buscar " + ex.Message); }
+
+            // COMBOBOX TIPO CONTRATO
+            reader=null;
+            consulta = "Select ID,descripcion From ingresa a order by a.id";
+            try
+            {
+                IngresaCBX.DataSource = null;
+                IngresaCBX.Items.Clear();
+                MySqlCommand comand = new MySqlCommand(consulta, conectar);
+                reader = comand.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                DataRow newRow = dt.NewRow();
+                newRow["descripcion"] = "Seleccione";
+                dt.Rows.InsertAt(newRow, 0);
+                IngresaCBX.DataSource = dt;
+                IngresaCBX.DisplayMember = "descripcion";
+                IngresaCBX.ValueMember = "ID";
+            }
+            catch (MySqlException ex) { MessageBox.Show("Error al buscar " + ex.Message); }
+            finally { conectar.Close(); }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -253,9 +318,64 @@ namespace Liquidacion
 
         private void ValorCBX_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ValorCBX.Text == "Hora") { detalleTBX.Text = "F(x) = Valor hora * cantidad * factor"; }
-            if (ValorCBX.Text == "Dia") { detalleTBX.Text = "F(x) = Sueldo mensual / 30 * cantidad * factor"; }
-            if (ValorCBX.Text == "Importe") { detalleTBX.Text = "F(x) = Importe * cantidad * factor"; }
+            try
+            {
+                if(IngresaCBX.Text == "Seleccione") { detalleTBX.Text = ""; }
+                int valor = (int)IngresaCBX.SelectedValue;
+                string consultaNueva = "select x.formula from ingresa x where x.id=" + valor.ToString();
+                MySqlConnection conectar = Conexion.ObtenerConexion();
+                conectar.Open();
+                DataTable dt = new DataTable();
+                try
+                {
+                    MySqlCommand comand = new MySqlCommand(consultaNueva, conectar);
+                    MySqlDataAdapter adp = new MySqlDataAdapter(comand);
+                    adp.Fill(dt);
+                    if (dt.Rows.Count == 0) { }
+                    else
+                    {
+                        foreach (DataRow x in dt.Rows)
+                        {
+
+                            detalleTBX.Text = (string)x[0];
+                        }
+                    }
+                }
+                catch (Exception ex) { MessageBox.Show("Error al buscar " + ex.Message); }
+                finally { conectar.Close(); }
+            }
+            catch (Exception)
+            { }
+
+            }
+
+        private void ConvenioCBX_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Cuadro.Rows.Clear();
+            try
+            {
+                int numero = (int)ConvenioCBX.SelectedValue;
+                string consulta5 = "select id, concat(numero,' - ', descripcion) as descripcion from tipocontrato tc where tc.convenio_ID=" + numero.ToString() + " order by tc.numero";
+                MySqlConnection conectar = Conexion.ObtenerConexion();
+                MySqlDataReader reader;
+                conectar.Open();
+                try
+                {
+                    MySqlCommand comand = new MySqlCommand(consulta5, conectar);
+                    reader = comand.ExecuteReader();
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+                    DataRow newRow = dt.NewRow();
+                    newRow["descripcion"] = "Seleccione";
+                    dt.Rows.InsertAt(newRow, 0);
+                    TipoContratoCBX.DataSource = dt;
+                    TipoContratoCBX.DisplayMember = "descripcion";
+                    TipoContratoCBX.ValueMember = "ID";
+                }
+                catch (MySqlException ex) { MessageBox.Show("Error al buscar " + ex.Message); }
+                finally { conectar.Close(); }
+            }
+            catch (Exception) { Limpiar(); TipoContratoCBX.DataSource = null; }
         }
     }
 }

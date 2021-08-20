@@ -264,6 +264,7 @@ namespace Liquidacion
                     TipoContratoCBX.ValueMember = "ID";
                 }
                 catch (MySqlException ex) { MessageBox.Show("Error al buscar " + ex.Message); }
+                finally { conectar.Close(); }
             }
             catch (Exception) { Limpiar(); TipoContratoCBX.DataSource = null; }
         }

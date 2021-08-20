@@ -608,7 +608,27 @@ namespace Liquidacion
         }
 
 
+        public static DataTable VerConcepto()
+        {
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            conectar.Open();
+            DataTable dt = new DataTable();
+            try
+            {
+                MySqlCommand comand = new MySqlCommand(" verConceptos", conectar);
+                comand.CommandType = CommandType.StoredProcedure;
+                MySqlDataAdapter adp = new MySqlDataAdapter(comand);
+                adp.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    return dt;
+                }
+                else { MessageBox.Show("No hay conceptos ingresados "); return null; }
 
+            }
+            catch (Exception ex) { MessageBox.Show("Error al buscar " + ex.Message); return null; }
+            finally { conectar.Close(); }
+        }
 
 
 

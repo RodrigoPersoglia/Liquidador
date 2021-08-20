@@ -5,7 +5,7 @@
 -- HeidiSQL Versión:             9.4.0.5125
 -- --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;    
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   KEY `fk_categoria_convenio` (`convenio_ID`),
   CONSTRAINT `fk_categoria_convenio` FOREIGN KEY (`convenio_ID`) REFERENCES `convenio` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_categoria_tipoContrato1` FOREIGN KEY (`tipoContrato_ID`) REFERENCES `tipocontrato` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla liquidacion.categoria: ~9 rows (aproximadamente)
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
@@ -186,7 +186,8 @@ REPLACE INTO `categoria` (`ID`, `numero`, `descripcion`, `importe`, `tipoContrat
 	(22, 2, 'Administrativo B', 50000.800, 4, 3),
 	(23, 3, 'Operario Multiple', 280.000, 2, 1),
 	(24, 5, 'Operario Especializado', 500.150, 5, 3),
-	(25, 1, 'operario Multiple', 600.330, 5, 3);
+	(25, 1, 'operario Multiple', 600.330, 5, 3),
+	(26, 10, 'Tecnico 4', 51500.000, 1, 1);
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 
 -- Volcando estructura para tabla liquidacion.conceptos
@@ -196,9 +197,17 @@ CREATE TABLE IF NOT EXISTS `conceptos` (
   `descripcion` varchar(45) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `importe` decimal(12,3) NOT NULL,
+  `factor` decimal(9,3) NOT NULL,
+  `tipoConcepto_ID` int(11) NOT NULL,
+  `ingresa_ID` int(11) NOT NULL,
   `tipoContrato_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
+  UNIQUE KEY `Índice 5` (`numero`,`tipoContrato_ID`),
   KEY `fk_Conceptos_tipoContrato1_idx` (`tipoContrato_ID`),
+  KEY `fk_Conceptos_tipoConcepto` (`tipoConcepto_ID`),
+  KEY `FK_conceptos_ingresa` (`ingresa_ID`),
+  CONSTRAINT `FK_conceptos_ingresa` FOREIGN KEY (`ingresa_ID`) REFERENCES `ingresa` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Conceptos_tipoConcepto` FOREIGN KEY (`tipoConcepto_ID`) REFERENCES `tipoconcepto` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Conceptos_tipoContrato1` FOREIGN KEY (`tipoContrato_ID`) REFERENCES `tipocontrato` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -319,16 +328,17 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   CONSTRAINT `fk_empleado_sucursal1` FOREIGN KEY (`sucursal_ID`) REFERENCES `sucursal` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_empleado_tipoContrato1` FOREIGN KEY (`tipoContrato_ID`) REFERENCES `tipocontrato` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_empleado_turno1` FOREIGN KEY (`turno_ID`) REFERENCES `turno` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla liquidacion.empleado: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla liquidacion.empleado: ~6 rows (aproximadamente)
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
 REPLACE INTO `empleado` (`ID`, `legajo`, `nombre`, `apellido`, `tipoDNI`, `numeroDNI`, `cuil1`, `cuil2`, `cuil3`, `direccion`, `localidad`, `provincia`, `fechaNacimiento`, `telefono`, `celular`, `fechaIngreso`, `mesesAnteriores`, `activo`, `fechaBaja`, `sueldoAcordado`, `turno_ID`, `obraSocial_ID`, `tipoContrato_ID`, `categoria_ID`, `sucursal_ID`, `convenio_ID`) VALUES
-	(1, 1, 'RODRIGO', 'PERSOGLIA', 'DNI', 34813823, 20, 34813823, 6, 'BARZI 719', 'VARELA', 'Buenos Aires', '2021-08-12', '1541709324', '43557120', '2021-08-12', 0, 1, NULL, 0.000, 1, 12, 1, 17, 1, 1),
-	(2, 2, 'roberto', 'gomes', 'DNI', 34813824, 20, 34813823, 1, 'a', 'a', 'Capital Federal', '2021-08-12', 'a', 'a', '2021-08-12', 0, 1, NULL, 0.000, 5, 12, 4, 21, 1, 3),
+	(1, 1, 'RODRIGO ABEL', 'PERSOGLIA', 'DNI', 34813823, 20, 34813823, 6, 'BARZI 719', 'VARELA', 'Buenos Aires', '1989-09-09', '1541709324', '43557120', '2010-07-01', 0, 1, NULL, 0.000, 6, 12, 1, 26, 1, 1),
+	(2, 2, 'ROBERTO', 'GOMEZ BOLAÑOS', 'DNI', 34813824, 20, 34813823, 1, 'MEXICO 1990', 'ACAPULCO', 'Capital Federal', '2021-08-12', '0800-ELCHAVO', '0', '2021-08-12', 0, 1, NULL, 0.000, 5, 12, 4, 21, 1, 3),
 	(3, 3, 'a', 'a', 'DNI', 1, 1, 1, 1, 'a', 'a', 'Buenos Aires', '2021-08-12', 'a', 'a', '2021-08-12', 15, 1, NULL, 98313.150, 1, 19, 4, 22, 1, 3),
 	(4, 4, 'marcelo', 'alegre', 'DNI', 92111222, 20, 92111222, 6, 'san martin 1809', 'varela', 'Buenos Aires', '2000-01-12', '1', '1', '2021-08-12', 15, 1, NULL, 0.000, 1, 8, 5, 25, 1, 3),
-	(5, 5, 'MARIA BELEN', 'WALTER', 'DNI', 38959263, 20, 38959263, 6, 'CALLE 15 A Nº 942', 'VARELA', 'Buenos Aires', '1995-07-09', '1541709324', '43557120', '2021-08-12', 0, 1, NULL, 11000.000, 1, 19, 4, 21, 1, 3);
+	(5, 5, 'MARIA BELEN', 'WALTER', 'DNI', 38959263, 20, 38959263, 6, 'CALLE 15 A Nº 942', 'VARELA', 'Buenos Aires', '1995-07-09', '4287-1844', '15-4657-5833', '2021-08-12', 0, 1, NULL, 0.000, 1, 19, 4, 21, 1, 3),
+	(6, 14, 'a', 'a', 'DNI', 1515151, 1, 1515151, 1, ' ', ' ', 'Capital Federal', '2021-08-13', ' ', ' ', '2021-08-13', 0, 1, NULL, 0.000, 5, 12, 4, 21, 1, 3);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 
 -- Volcando estructura para tabla liquidacion.empresa
@@ -363,6 +373,24 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `HeidiSQL_temproutine_1`(
 )
 start transaction;//
 DELIMITER ;
+
+-- Volcando estructura para tabla liquidacion.ingresa
+CREATE TABLE IF NOT EXISTS `ingresa` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(50) NOT NULL,
+  `formula` varchar(100) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla liquidacion.ingresa: ~5 rows (aproximadamente)
+/*!40000 ALTER TABLE `ingresa` DISABLE KEYS */;
+REPLACE INTO `ingresa` (`ID`, `descripcion`, `formula`) VALUES
+	(1, 'Dia', 'F(x) = Sueldo mensual / 30 * cantidad * factor'),
+	(2, 'Hora', 'F(x) = Valor hora * cantidad * factor'),
+	(3, 'Importe', 'F(x) = Importe * cantidad * factor'),
+	(4, 'Antigüedad', 'F(x) = 1% anual * Remunerativos'),
+	(5, 'Mínimo Asegurado', 'Importe mínimo asegurado que el empleado debe cobrar');
+/*!40000 ALTER TABLE `ingresa` ENABLE KEYS */;
 
 -- Volcando estructura para tabla liquidacion.liquidacion
 CREATE TABLE IF NOT EXISTS `liquidacion` (
@@ -423,6 +451,71 @@ descripcion = p2,
 numero = p3,
 año = p4
 where c.ID = p0;
+COMMIT;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento liquidacion.ModificarEmpleado
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ModificarEmpleado`(
+	IN `p0` int,
+	IN `p1` int,
+	IN `p2` varchar(100),
+	IN `p3` varchar(100),
+	IN `p4` varchar(45),
+	IN `p5` int(8),
+	IN `p6` int(2),
+	IN `p7` int(8),
+	IN `p8` int (1),
+	IN `p9` varchar(45),
+	IN `p10` varchar(45),
+	IN `p11` varchar(45),
+	IN `p12` date,
+	IN `p13` varchar(45),
+	IN `p14` varchar(45),
+	IN `p15` date,
+	IN `p16` int,
+	IN `p17` tinyint,
+	IN `p18` date,
+	IN `p19` decimal(20,3),
+	IN `p20` int,
+	IN `p21` int,
+	IN `p22` int,
+	IN `p23` int,
+	IN `p24` int,
+	IN `p25` int
+
+)
+BEGIN
+START TRANSACTION;
+update empleado e
+SET
+legajo = p1,
+nombre = p2,
+apellido = p3,
+tipoDNI = p4,
+numeroDNI = p5,
+cuil1 = p6,
+cuil2 = p7,
+cuil3 = p8,
+direccion = p9,
+localidad = p10,
+provincia = p11,
+fechaNacimiento = p12,
+telefono = p13,
+celular = p14,
+fechaIngreso = p15,
+mesesAnteriores = p16,
+activo = p17,
+fechaBaja = p18,
+sueldoAcordado = p19,
+turno_ID = p20,
+obraSocial_ID = p21,
+tipoContrato_ID = p22,
+categoria_ID = p23,
+sucursal_ID = p24,
+convenio_ID = p25
+where e.ID = p0;
 COMMIT;
 END//
 DELIMITER ;
@@ -552,6 +645,21 @@ REPLACE INTO `sucursal` (`ID`, `numero`, `nombre`, `direccion`, `Localidad`, `Pr
 	(1, 1, 'CENTRAL', 'Remedios de Escalada de San Martin 1809', '9 de Abril', 'Buenos Aires', '4693-0122', '4693-0054');
 /*!40000 ALTER TABLE `sucursal` ENABLE KEYS */;
 
+-- Volcando estructura para tabla liquidacion.tipoconcepto
+CREATE TABLE IF NOT EXISTS `tipoconcepto` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla liquidacion.tipoconcepto: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `tipoconcepto` DISABLE KEYS */;
+REPLACE INTO `tipoconcepto` (`ID`, `descripcion`) VALUES
+	(1, 'Remunerativo'),
+	(2, 'No Remunerativo'),
+	(3, 'Descuento');
+/*!40000 ALTER TABLE `tipoconcepto` ENABLE KEYS */;
+
 -- Volcando estructura para tabla liquidacion.tipocontrato
 CREATE TABLE IF NOT EXISTS `tipocontrato` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -600,6 +708,14 @@ select *
 from categoria c
 where c.tipoContrato_ID = p1
 order by c.numero//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento liquidacion.verConceptos
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `verConceptos`()
+select *,tc.descripcion
+from conceptos c
+inner join tipoConcepto tc on c.tipoConcepto_ID=tc.ID//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento liquidacion.VerConvenio
