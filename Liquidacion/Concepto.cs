@@ -23,37 +23,7 @@ namespace Liquidacion
         {
             MySqlConnection conectar = Conexion.ObtenerConexion();
             conectar.Open();
-            //try
-            //{
-            //    //completo el cuadro
-            //    DataTable dt2 = Conexion.VerConcepto();
-            //    Cuadro.Rows.Clear();
-            //    if (dt2 != null)
-            //    {
-
-            //        foreach (DataRow x in dt2.Rows)
-            //        {
-            //            int n = Cuadro.Rows.Add();
-            //            Cuadro.Rows[n].Cells[0].Value = false;
-            //            Cuadro.Rows[n].Cells[1].Value = (int)x[0];
-            //            Cuadro.Rows[n].Cells[2].Value = (int)x[1];
-            //            Cuadro.Rows[n].Cells[3].Value = (string)x[2];
-            //            Cuadro.Rows[n].Cells[4].Value = (int)x[3];
-            //            Cuadro.Rows[n].Cells[5].Value = (decimal)x[4];
-            //            Cuadro.Rows[n].Cells[6].Value = (decimal)x[5];
-            //            Cuadro.Rows[n].Cells[7].Value = (string)x[9];
-            //            Cuadro.Rows[n].Cells[8].Value = (int)x[7];
-            //            Cuadro.Rows[n].Cells[9].Value = (int)x[8];
-            //            Cuadro.Rows[n].Cells[10].Value = (string)x[6];
-
-
-            //        }
-            //    }
-
-            //}
-            //catch (MySqlException ex) { MessageBox.Show("Error al buscar " + ex.Message); }
-
-
+            //COMBOBOX DE CONVENIO
             try
             {
                 ConvenioCBX.DataSource = null;
@@ -91,7 +61,7 @@ namespace Liquidacion
             }
             catch (MySqlException ex) { MessageBox.Show("Error al buscar " + ex.Message); }
 
-            // COMBOBOX TIPO CONTRATO
+            // COMBOBOX INGRESA
             reader=null;
             consulta = "Select ID,descripcion From ingresa a order by a.id";
             try
@@ -159,18 +129,17 @@ namespace Liquidacion
 
         private void Agregar_Click(object sender, EventArgs e)
         {
-            //if ( descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red  && NumTBX.Text != "" && abreviaturaTBX.Text != "")
-            //{
-            //    try
-            //    {
-            //       Conexion.AgregarConcepto(int.Parse(NumTBX.Text), descripcionTBX.Text, abreviaturaTBX.Text);
-            //        Limpiar();
-            //        Concepto_Load(sender, e);
-            //    }
-                
-            //    catch (Exception) { MessageBox.Show("No se pudo agregar la categoría, revise los datos y reintente"); }
-            //}
-            //else { MessageBox.Show("Revise los campos ingresados");}
+            if (descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red && NumTBX.Text != "" && TipoContratoCBX.DataSource!=null && TipoContratoCBX.Text!="Seleccione" && TipoConceptoCBX.Text != "Seleccione" && IngresaCBX.Text != "Seleccione")
+            {
+                try
+                {
+                    Conexion.AgregarConcepto(int.Parse(NumTBX.Text),descripcionTBX.Text,decimal.ToInt32(CantidadNumeric.Value),importeNumeric.Value,FactorNumeric.Value,(int)TipoConceptoCBX.SelectedValue,(int)IngresaCBX.SelectedValue,(int)TipoContratoCBX.SelectedValue);
+                    TipoContratoCBX_SelectionChangeCommitted(sender, e);
+                }
+
+                catch (Exception) { MessageBox.Show("No se pudo agregar el concepto, revise los datos y reintente"); }
+            }
+            else { MessageBox.Show("Revise los campos ingresados"); }
         }
 
         private void Limpiar()
@@ -178,37 +147,41 @@ namespace Liquidacion
         
             NumTBX.Text = "";
             descripcionTBX.Text = "";
-           // abreviaturaTBX.Text = "";
+            CantidadNumeric.Value = 0;
+            importeNumeric.Value = 0;
+            FactorNumeric.Value = 1;
+            TipoConceptoCBX.Text = "Seleccione";
+            IngresaCBX.Text = "Seleccione";
+           
         }
 
         private void ModificarBTN_Click(object sender, EventArgs e)
         {
-            //if ( descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red && NumTBX.Text != "" && abreviaturaTBX.Text != "")
-            //{
-            //    try
-            //    {
-            //        bool check = false;
-            //        for (int fila = 0; fila < Cuadro.Rows.Count; fila++)
-            //        {
-            //            if ((bool)Cuadro.Rows[fila].Cells[0].Value == true)
-            //            {
-            //                check = true; break;
-            //            }
-            //        }
+            if (descripcionTBX.Text != "" && NumTBX.ForeColor != System.Drawing.Color.Red && NumTBX.Text != "" && TipoContratoCBX.DataSource != null && TipoContratoCBX.Text != "Seleccione" && TipoConceptoCBX.Text != "Seleccione" && IngresaCBX.Text != "Seleccione")
+            {
+                try
+                {
+                    bool check = false;
+                    for (int fila = 0; fila < Cuadro.Rows.Count; fila++)
+                    {
+                        if ((bool)Cuadro.Rows[fila].Cells[0].Value == true)
+                        {
+                            check = true; break;
+                        }
+                    }
 
-            //        if (check == true)
-            //        {
-            //            Conexion.ModificarConcepto((int)Cuadro.Rows[n].Cells[1].Value,int.Parse(NumTBX.Text),descripcionTBX.Text,abreviaturaTBX.Text);
-            //            Limpiar();
-            //            Concepto_Load(sender, e);
-            //        }
+                    if (check == true)
+                    {
+                        Conexion.ModificarConcepto((int)Cuadro.Rows[n].Cells[1].Value, int.Parse(NumTBX.Text), descripcionTBX.Text, decimal.ToInt32(CantidadNumeric.Value), importeNumeric.Value, FactorNumeric.Value, (int)TipoConceptoCBX.SelectedValue, (int)IngresaCBX.SelectedValue, (int)TipoContratoCBX.SelectedValue);
+                        TipoContratoCBX_SelectionChangeCommitted(sender, e);
+                    }
 
 
-            //        else { MessageBox.Show("No hay ningun registro seleccionado"); }
-            //    }
-            //    catch (Exception) { MessageBox.Show("No se pudo modificar la categoría, revise los datos y reintente"); }
-            //}
-            //else { MessageBox.Show("Revise los campos ingresados"); }
+                    else { MessageBox.Show("No hay ningun registro seleccionado"); }
+                }
+                catch (Exception) { MessageBox.Show("No se pudo modificar el concepto, revise los datos y reintente"); }
+            }
+            else { MessageBox.Show("Revise los campos ingresados"); }
         }
 
     
@@ -225,13 +198,13 @@ namespace Liquidacion
                 {
                     Cuadro.Rows[n].Cells[0].Value = false;
                     Limpiar();
-                    Concepto_Load(sender, e);
+                    TipoContratoCBX_SelectionChangeCommitted(sender, e);
                 }
                 else
                 {
-                try
-                {
-                    for (int fila = 0; fila < Cuadro.Rows.Count; fila++)
+                    try
+                    {
+                        for (int fila = 0; fila < Cuadro.Rows.Count; fila++)
                         {
                             Cuadro.Rows[fila].Cells[0].Value = false;
                             Cuadro.Rows[fila].DefaultCellStyle.BackColor = Color.White;
@@ -239,76 +212,89 @@ namespace Liquidacion
                         }
                         Cuadro.CurrentRow.DefaultCellStyle.BackColor = Color.Yellow;
                         Cuadro.Rows[n].Cells[0].Value = true;
-
                         NumTBX.Text = ((int)Cuadro.Rows[n].Cells[2].Value).ToString();
                         descripcionTBX.Text = (string)Cuadro.Rows[n].Cells[3].Value;
-                       // abreviaturaTBX.Text = (string)Cuadro.Rows[n].Cells[4].Value;
+                        CantidadNumeric.Value = (int)Cuadro.Rows[n].Cells[4].Value;
+                        importeNumeric.Value = (decimal)Cuadro.Rows[n].Cells[5].Value;
+                        FactorNumeric.Value = (decimal)Cuadro.Rows[n].Cells[6].Value;
+                        TipoConceptoCBX.SelectedValue = (int)Cuadro.Rows[n].Cells[7].Value;
+                        IngresaCBX.SelectedValue = (int)Cuadro.Rows[n].Cells[8].Value;
 
 
-                }
-                catch (Exception) { }
 
+                    }
+                    catch (Exception) { }
 
-            }
 
         }
+
+            }
             catch (Exception) { }
 }
 
         private void EliminarBTN_Click(object sender, EventArgs e)
         {
-            
-            //try
-            //{
-            //    bool check = false;
-            //    for (int fila = 0; fila < Cuadro.Rows.Count; fila++)
-            //    {
-            //        if ((bool)Cuadro.Rows[fila].Cells[0].Value == true)
-            //        {
-            //            check = true; break;
-            //        }
-            //    }
 
-            //    if (check == true)
-            //    {
-            //        Conexion.EliminarConcepto((int)Cuadro.Rows[n].Cells[1].Value);
-            //        Limpiar();
-            //        Concepto_Load(sender, e);
-            //    }
+            try
+            {
+                bool check = false;
+                for (int fila = 0; fila < Cuadro.Rows.Count; fila++)
+                {
+                    if ((bool)Cuadro.Rows[fila].Cells[0].Value == true)
+                    {
+                        check = true; break;
+                    }
+                }
+
+                if (check == true)
+                {
+                    Conexion.EliminarConcepto((int)Cuadro.Rows[n].Cells[1].Value);
+
+                    TipoContratoCBX_SelectionChangeCommitted(sender, e);
+                }
 
 
-            //    else { MessageBox.Show("No hay ningun registro seleccionado"); }
-            //}
-            //catch (Exception) { MessageBox.Show("No se pudo eliminar la categoría, revise los datos y reintente"); }
+                else { MessageBox.Show("No hay ningun registro seleccionado"); }
+            }
+            catch (Exception) { MessageBox.Show("No se pudo eliminar el concepto, revise los datos y reintente"); }
         }
 
         private void Buscar_Click(object sender, EventArgs e)
         {
-            BusquedaRapida selec = new BusquedaRapida("numero","descripcion","Concepto");
-            DialogResult resultado = selec.ShowDialog();
-            int id = selec.IDBusqueda;
-            Concepto_Load(sender, e);
-            try
+            if (TipoContratoCBX.Text != "Seleccione" && TipoContratoCBX.DataSource!=null)
             {
-                for (int fila = 0; fila < Cuadro.Rows.Count; fila++)
+                BusquedaRapida selec = new BusquedaRapida("numero", "descripcion", "Conceptos", "t.tipoContrato_ID=",(int)TipoContratoCBX.SelectedValue);
+                DialogResult resultado = selec.ShowDialog();
+                int id = selec.IDBusqueda;
+                try
                 {
-                    if ((int)Cuadro.Rows[fila].Cells[1].Value == id)
+                    for (int fila = 0; fila < Cuadro.Rows.Count; fila++)
                     {
-                        Cuadro.Rows[fila].DefaultCellStyle.BackColor = Color.Yellow;
-                        Cuadro.Rows[fila].Cells[0].Value = true;
-                        NumTBX.Text = ((int)Cuadro.Rows[fila].Cells[2].Value).ToString();
-                        descripcionTBX.Text = (string)Cuadro.Rows[fila].Cells[3].Value;
-                        //abreviaturaTBX.Text = (string)Cuadro.Rows[fila].Cells[4].Value;
-                        Cuadro.CurrentCell = Cuadro.Rows[fila].Cells[0];
-                        n = fila;
+                        if ((int)Cuadro.Rows[fila].Cells[1].Value == id)
+                        {
+                            n = fila;
+                            Cuadro.Rows[fila].DefaultCellStyle.BackColor = Color.Yellow;
+                            Cuadro.Rows[fila].Cells[0].Value = true;
+                            Cuadro.Rows[n].Cells[0].Value = true;
+                            NumTBX.Text = ((int)Cuadro.Rows[n].Cells[2].Value).ToString();
+                            descripcionTBX.Text = (string)Cuadro.Rows[n].Cells[3].Value;
+                            CantidadNumeric.Value = (int)Cuadro.Rows[n].Cells[4].Value;
+                            importeNumeric.Value = (decimal)Cuadro.Rows[n].Cells[5].Value;
+                            FactorNumeric.Value = (decimal)Cuadro.Rows[n].Cells[6].Value;
+                            TipoConceptoCBX.SelectedValue = (int)Cuadro.Rows[n].Cells[7].Value;
+                            IngresaCBX.SelectedValue = (int)Cuadro.Rows[n].Cells[8].Value;
+                            Cuadro.CurrentCell = Cuadro.Rows[fila].Cells[0];
+
+                        }
+
                     }
 
+
+
                 }
-
-
-
+                catch (Exception) { }
             }
-            catch (Exception) { }
+            else { MessageBox.Show("Seleccione un tipo de contrato"); }
         }
 
         private void IngresaCBX_SelectionChangeCommitted(object sender, EventArgs e)
@@ -376,6 +362,44 @@ namespace Liquidacion
                 finally { conectar.Close(); }
             }
             catch (Exception) { Limpiar(); TipoContratoCBX.DataSource = null; }
+        }
+
+        private void TipoContratoCBX_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Limpiar();
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            conectar.Open();
+            try
+            {
+                int id = (int)TipoContratoCBX.SelectedValue;
+                //completo el cuadro
+                DataTable dt2 = Conexion.VerConcepto(id);
+                Cuadro.Rows.Clear();
+                if (dt2 != null)
+                {
+
+                    foreach (DataRow x in dt2.Rows)
+                    {
+                        int n = Cuadro.Rows.Add();
+                        Cuadro.Rows[n].Cells[0].Value = false;
+                        Cuadro.Rows[n].Cells[1].Value = (int)x[0];
+                        Cuadro.Rows[n].Cells[2].Value = (int)x[1];
+                        Cuadro.Rows[n].Cells[3].Value = (string)x[2];
+                        Cuadro.Rows[n].Cells[4].Value = (int)x[3];
+                        Cuadro.Rows[n].Cells[5].Value = (decimal)x[4];
+                        Cuadro.Rows[n].Cells[6].Value = (decimal)x[5];
+                        Cuadro.Rows[n].Cells[7].Value = (int)x[6];
+                        Cuadro.Rows[n].Cells[8].Value = (int)x[7];
+                        Cuadro.Rows[n].Cells[9].Value = (int)x[8];
+                        Cuadro.Rows[n].Cells[10].Value = (string)x[9];
+                        Cuadro.Rows[n].Cells[11].Value = (string)x[10];
+
+                    }
+                }
+
+            }
+            catch (MySqlException ex) { MessageBox.Show("Error al buscar " + ex.Message); }
+            finally { conectar.Close();}
         }
     }
 }

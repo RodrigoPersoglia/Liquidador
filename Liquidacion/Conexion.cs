@@ -608,7 +608,7 @@ namespace Liquidacion
         }
 
 
-        public static DataTable VerConcepto()
+        public static DataTable VerConcepto( int id)
         {
             MySqlConnection conectar = Conexion.ObtenerConexion();
             conectar.Open();
@@ -617,6 +617,7 @@ namespace Liquidacion
             {
                 MySqlCommand comand = new MySqlCommand(" verConceptos", conectar);
                 comand.CommandType = CommandType.StoredProcedure;
+                comand.Parameters.AddWithValue("@p0", id);
                 MySqlDataAdapter adp = new MySqlDataAdapter(comand);
                 adp.Fill(dt);
                 if (dt.Rows.Count > 0)
@@ -631,6 +632,70 @@ namespace Liquidacion
         }
 
 
+        public static void AgregarConcepto(int numero, string descripcion, int cantidad, decimal importe,decimal factor,int tipoConceptoID,int IngresaID, int tipoContratoID)
+        {
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            conectar.Open();
+            try
+            {
+                MySqlCommand comand = new MySqlCommand("agregarConcepto", conectar);
+                comand.CommandType = CommandType.StoredProcedure;
+                comand.Parameters.AddWithValue("@p1", numero);
+                comand.Parameters.AddWithValue("@p2", descripcion);
+                comand.Parameters.AddWithValue("@p3", cantidad);
+                comand.Parameters.AddWithValue("@p4", importe);
+                comand.Parameters.AddWithValue("@p5", factor);
+                comand.Parameters.AddWithValue("@p6", tipoConceptoID);
+                comand.Parameters.AddWithValue("@p7", IngresaID);
+                comand.Parameters.AddWithValue("@p8", tipoContratoID);
+
+                comand.ExecuteNonQuery();
+                MessageBox.Show("Concepto Agregado");
+            }
+            catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+            finally { conectar.Close(); }
+        }
+        public static void ModificarConcepto(int ID,int numero, string descripcion, int cantidad, decimal importe, decimal factor, int tipoConceptoID, int IngresaID, int tipoContratoID)
+        {
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            conectar.Open();
+            try
+            {
+                MySqlCommand comand = new MySqlCommand("modificarConcepto", conectar);
+                comand.CommandType = CommandType.StoredProcedure;
+                comand.Parameters.AddWithValue("@p0", ID);
+                comand.Parameters.AddWithValue("@p1", numero);
+                comand.Parameters.AddWithValue("@p2", descripcion);
+                comand.Parameters.AddWithValue("@p3", cantidad);
+                comand.Parameters.AddWithValue("@p4", importe);
+                comand.Parameters.AddWithValue("@p5", factor);
+                comand.Parameters.AddWithValue("@p6", tipoConceptoID);
+                comand.Parameters.AddWithValue("@p7", IngresaID);
+                comand.Parameters.AddWithValue("@p8", tipoContratoID);
+                comand.ExecuteNonQuery();
+                MessageBox.Show("Concepto Modificado");
+            }
+            catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+            finally { conectar.Close(); }
+        }
+
+        public static void EliminarConcepto(int ID)
+        {
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            conectar.Open();
+            try
+            {
+                MySqlCommand comand = new MySqlCommand("eliminarConcepto", conectar);
+                comand.CommandType = CommandType.StoredProcedure;
+                comand.Parameters.AddWithValue("@p0", ID);
+
+
+                comand.ExecuteNonQuery();
+                MessageBox.Show("Concepto Eliminado");
+            }
+            catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+            finally { conectar.Close(); }
+        }
 
     }
 }

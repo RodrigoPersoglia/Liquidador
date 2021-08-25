@@ -21,8 +21,15 @@ namespace Liquidacion
             Campo1 = campo1; Campo2 = campo2; Tabla = tabla; Campo3 = campo3;
         }
 
+        public BusquedaRapida(string campo1, string campo2, string tabla,string condicion, int numero)
+        {
+            InitializeComponent();
+            Campo1 = campo1; Campo2 = campo2; Tabla = tabla; Condicion = condicion+numero.ToString();
+        }
+
         //Variables
         private string Campo1, Campo2, Campo3, Tabla;
+        private string Condicion="";
         public int IDBusqueda { get; set; }
         private int n;
 
@@ -93,7 +100,14 @@ namespace Liquidacion
         {
             if (Campo3 == null)
             {
-                string consultaNueva = "select t.ID, t." + Campo1 + ", t." + Campo2 + " from " + Tabla + " t where t." + Campo1 + " like '%" + BusquedaTBX.Text + "%' or t." + Campo2 + " like '%" + BusquedaTBX.Text + "%' order by t." + Campo1;
+                string consultaNueva = "";
+                if (Condicion == "")
+                {
+                    consultaNueva = "select t.ID, t." + Campo1 + ", t." + Campo2 + " from " + Tabla + " t where t." + Campo1 + " like '%" + BusquedaTBX.Text + "%' or t." + Campo2 + " like '%" + BusquedaTBX.Text + "%' order by t." + Campo1;
+                }
+                else {
+                    consultaNueva = "select t.ID, t." + Campo1 + ", t." + Campo2 + " from " + Tabla + " t where "+Condicion+" and (t." + Campo1 + " like '%" + BusquedaTBX.Text + "%' or t." + Campo2 + " like '%" + BusquedaTBX.Text + "%' ) order by t." + Campo1;
+                }
                 Cuadro.Rows.Clear();
                 MySqlConnection conectar = Conexion.ObtenerConexion();
                 conectar.Open();

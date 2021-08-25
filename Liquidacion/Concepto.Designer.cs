@@ -31,9 +31,9 @@ namespace Liquidacion
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label9 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.importeNumeric = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.CantidadNumeric = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -64,16 +64,17 @@ namespace Liquidacion
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Factor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipoContratoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ingresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipoConceptoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IngresaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoContratoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ingresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.importeNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CantidadNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FactorNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cuadro)).BeginInit();
             this.SuspendLayout();
@@ -89,9 +90,9 @@ namespace Liquidacion
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.splitContainer1.Panel1.Controls.Add(this.label9);
-            this.splitContainer1.Panel1.Controls.Add(this.numericUpDown2);
+            this.splitContainer1.Panel1.Controls.Add(this.importeNumeric);
             this.splitContainer1.Panel1.Controls.Add(this.label8);
-            this.splitContainer1.Panel1.Controls.Add(this.numericUpDown1);
+            this.splitContainer1.Panel1.Controls.Add(this.CantidadNumeric);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
@@ -135,23 +136,23 @@ namespace Liquidacion
             this.label9.TabIndex = 54;
             this.label9.Text = "Valores predeterminados:";
             // 
-            // numericUpDown2
+            // importeNumeric
             // 
-            this.numericUpDown2.DecimalPlaces = 3;
-            this.numericUpDown2.Increment = new decimal(new int[] {
+            this.importeNumeric.DecimalPlaces = 3;
+            this.importeNumeric.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDown2.Location = new System.Drawing.Point(287, 181);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.importeNumeric.Location = new System.Drawing.Point(287, 181);
+            this.importeNumeric.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown2.TabIndex = 10;
+            this.importeNumeric.Name = "importeNumeric";
+            this.importeNumeric.Size = new System.Drawing.Size(120, 20);
+            this.importeNumeric.TabIndex = 10;
             // 
             // label8
             // 
@@ -164,23 +165,17 @@ namespace Liquidacion
             this.label8.TabIndex = 53;
             this.label8.Text = "Importe:";
             // 
-            // numericUpDown1
+            // CantidadNumeric
             // 
-            this.numericUpDown1.DecimalPlaces = 3;
-            this.numericUpDown1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numericUpDown1.Location = new System.Drawing.Point(89, 181);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.CantidadNumeric.Location = new System.Drawing.Point(89, 181);
+            this.CantidadNumeric.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 9;
+            this.CantidadNumeric.Name = "CantidadNumeric";
+            this.CantidadNumeric.Size = new System.Drawing.Size(120, 20);
+            this.CantidadNumeric.TabIndex = 9;
             // 
             // label1
             // 
@@ -228,6 +223,7 @@ namespace Liquidacion
             // 
             this.detalleTBX.Location = new System.Drawing.Point(415, 75);
             this.detalleTBX.Name = "detalleTBX";
+            this.detalleTBX.ReadOnly = true;
             this.detalleTBX.Size = new System.Drawing.Size(161, 45);
             this.detalleTBX.TabIndex = 7;
             this.detalleTBX.Text = "";
@@ -253,10 +249,10 @@ namespace Liquidacion
             65536});
             this.FactorNumeric.Location = new System.Drawing.Point(416, 130);
             this.FactorNumeric.Minimum = new decimal(new int[] {
-            1,
+            100,
             0,
             0,
-            196608});
+            -2147483648});
             this.FactorNumeric.Name = "FactorNumeric";
             this.FactorNumeric.Size = new System.Drawing.Size(68, 20);
             this.FactorNumeric.TabIndex = 8;
@@ -317,6 +313,7 @@ namespace Liquidacion
             this.TipoContratoCBX.Name = "TipoContratoCBX";
             this.TipoContratoCBX.Size = new System.Drawing.Size(160, 21);
             this.TipoContratoCBX.TabIndex = 2;
+            this.TipoContratoCBX.SelectionChangeCommitted += new System.EventHandler(this.TipoContratoCBX_SelectionChangeCommitted);
             // 
             // label16
             // 
@@ -432,10 +429,11 @@ namespace Liquidacion
             this.Cantidad,
             this.Importe,
             this.Factor,
-            this.Tipo,
+            this.tipoConceptoID,
+            this.IngresaID,
             this.tipoContratoID,
-            this.Ingresa,
-            this.tipoConceptoID});
+            this.Tipo,
+            this.Ingresa});
             this.Cuadro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Cuadro.Location = new System.Drawing.Point(0, 0);
             this.Cuadro.Name = "Cuadro";
@@ -494,11 +492,19 @@ namespace Liquidacion
             this.Factor.ReadOnly = true;
             this.Factor.Width = 50;
             // 
-            // Tipo
+            // tipoConceptoID
             // 
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.ReadOnly = true;
+            this.tipoConceptoID.HeaderText = "tipoConceptoID";
+            this.tipoConceptoID.Name = "tipoConceptoID";
+            this.tipoConceptoID.ReadOnly = true;
+            this.tipoConceptoID.Visible = false;
+            // 
+            // IngresaID
+            // 
+            this.IngresaID.HeaderText = "IngresaID";
+            this.IngresaID.Name = "IngresaID";
+            this.IngresaID.ReadOnly = true;
+            this.IngresaID.Visible = false;
             // 
             // tipoContratoID
             // 
@@ -507,18 +513,17 @@ namespace Liquidacion
             this.tipoContratoID.ReadOnly = true;
             this.tipoContratoID.Visible = false;
             // 
+            // Tipo
+            // 
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            // 
             // Ingresa
             // 
             this.Ingresa.HeaderText = "Ingresa";
             this.Ingresa.Name = "Ingresa";
             this.Ingresa.ReadOnly = true;
-            // 
-            // tipoConceptoID
-            // 
-            this.tipoConceptoID.HeaderText = "tipoConceptoID";
-            this.tipoConceptoID.Name = "tipoConceptoID";
-            this.tipoConceptoID.ReadOnly = true;
-            this.tipoConceptoID.Visible = false;
             // 
             // Concepto
             // 
@@ -537,8 +542,8 @@ namespace Liquidacion
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.importeNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CantidadNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FactorNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cuadro)).EndInit();
             this.ResumeLayout(false);
@@ -571,9 +576,9 @@ namespace Liquidacion
         private System.Windows.Forms.ComboBox TipoConceptoCBX;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown importeNumeric;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown CantidadNumeric;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn check;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
@@ -582,9 +587,10 @@ namespace Liquidacion
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Importe;
         private System.Windows.Forms.DataGridViewTextBoxColumn Factor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tipoContratoID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ingresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipoConceptoID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IngresaID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipoContratoID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ingresa;
     }
 }
