@@ -95,9 +95,17 @@ namespace Liquidacion
 
         private void conceptosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Concepto concepto = new Concepto();
+            ConceptoCrud concepto = new ConceptoCrud();
             concepto.MdiParent = this;
             concepto.Show();
+        }
+
+        private void liquidarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Liquidar liquidacion = new Liquidar();
+            liquidacion.MdiParent = this;
+            liquidacion.Show();
+
         }
     }
 }

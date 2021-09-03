@@ -61,17 +61,19 @@
     <Compile Include="BusquedaRapida.Designer.cs">
       <DependentUpon>BusquedaRapida.cs</DependentUpon>
     </Compile>
+    <Compile Include="Calcular.cs" />
     <Compile Include="Categoria.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Categoria.designer.cs">
       <DependentUpon>Categoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="Concepto.cs">
+    <Compile Include="Concepto.cs" />
+    <Compile Include="ConceptoCrud.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Concepto.Designer.cs">
-      <DependentUpon>Concepto.cs</DependentUpon>
+    <Compile Include="ConceptoCrud.Designer.cs">
+      <DependentUpon>ConceptoCrud.cs</DependentUpon>
     </Compile>
     <Compile Include="Conexion.cs" />
     <Compile Include="Convenio.cs">
@@ -80,13 +82,21 @@
     <Compile Include="Convenio.designer.cs">
       <DependentUpon>Convenio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Empleado.cs" />
     <Compile Include="Empresa.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Empresa.designer.cs">
       <DependentUpon>Empresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="ILiquidacion.cs" />
     <Compile Include="ExisteException.cs" />
+    <Compile Include="Liquidar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Liquidar.designer.cs">
+      <DependentUpon>Liquidar.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModificarEmpleado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +110,7 @@
       <DependentUpon>obraSocial.cs</DependentUpon>
     </Compile>
     <Compile Include="Os.cs" />
+    <Compile Include="Estrategias.cs" />
     <Compile Include="principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,14 +140,17 @@
     <EmbeddedResource Include="Categoria.resx">
       <DependentUpon>Categoria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Concepto.resx">
-      <DependentUpon>Concepto.cs</DependentUpon>
+    <EmbeddedResource Include="ConceptoCrud.resx">
+      <DependentUpon>ConceptoCrud.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Convenio.resx">
       <DependentUpon>Convenio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Empresa.resx">
       <DependentUpon>Empresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Liquidar.resx">
+      <DependentUpon>Liquidar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModificarEmpleado.resx">
       <DependentUpon>ModificarEmpleado.cs</DependentUpon>

@@ -1,7 +1,7 @@
 ﻿
 namespace Liquidacion
 {
-    partial class Concepto
+    partial class ConceptoCrud
     {
         /// <summary>
         /// Required designer variable.

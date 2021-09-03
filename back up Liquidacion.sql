@@ -35,6 +35,27 @@ COMMIT;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento liquidacion.agregarConcepto
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarConcepto`(
+	IN `p1` int,
+	IN `p2` varchar(45),
+	IN `p3` int,
+	IN `p4` decimal(12,3),
+	IN `p5` decimal(9,3),
+	IN `p6` int,
+	IN `p7` int,
+	IN `p8` int
+
+)
+BEGIN
+START TRANSACTION;
+insert into conceptos (numero,descripcion,cantidad,importe,factor,tipoConcepto_ID,ingresa_ID,tipoContrato_ID)
+values (p1,p2,p3,p4,p5,p6,p7,p8);
+COMMIT;
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento liquidacion.AgregarConvenio
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarConvenio`(
@@ -187,7 +208,7 @@ REPLACE INTO `categoria` (`ID`, `numero`, `descripcion`, `importe`, `tipoContrat
 	(23, 3, 'Operario Multiple', 280.000, 2, 1),
 	(24, 5, 'Operario Especializado', 500.150, 5, 3),
 	(25, 1, 'operario Multiple', 600.330, 5, 3),
-	(26, 10, 'Tecnico 4', 51500.000, 1, 1);
+	(26, 10, 'Tecnico 4ta.', 53154.590, 1, 1);
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 
 -- Volcando estructura para tabla liquidacion.conceptos
@@ -209,10 +230,26 @@ CREATE TABLE IF NOT EXISTS `conceptos` (
   CONSTRAINT `FK_conceptos_ingresa` FOREIGN KEY (`ingresa_ID`) REFERENCES `ingresa` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Conceptos_tipoConcepto` FOREIGN KEY (`tipoConcepto_ID`) REFERENCES `tipoconcepto` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Conceptos_tipoContrato1` FOREIGN KEY (`tipoContrato_ID`) REFERENCES `tipocontrato` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla liquidacion.conceptos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla liquidacion.conceptos: ~15 rows (aproximadamente)
 /*!40000 ALTER TABLE `conceptos` DISABLE KEYS */;
+REPLACE INTO `conceptos` (`ID`, `numero`, `descripcion`, `cantidad`, `importe`, `factor`, `tipoConcepto_ID`, `ingresa_ID`, `tipoContrato_ID`) VALUES
+	(1, 1, 'Sueldo Mensual', 30, 300.000, 15.000, 1, 1, 4),
+	(2, 1, 'Horas Trabajadas', 9, 1.000, 1.000, 1, 2, 5),
+	(4, 2, 'Horas Ausencia Injustificada', 9, 0.000, -1.000, 1, 2, 5),
+	(5, 3, 'Dias de Feriado', 1, 0.000, 1.000, 1, 1, 4),
+	(6, 3, 'Horas feriado', 9, 0.000, 1.000, 1, 2, 5),
+	(7, 1, 'Sueldo Mensual', 0, 0.000, 1.000, 1, 1, 1),
+	(8, 2, 'Dias Ausencia Justicada', 1, 0.000, 1.000, 1, 1, 1),
+	(10, 3, 'Dias de Estudio', 1, 1500.000, 1.000, 1, 1, 1),
+	(11, 2, 'Dias de Ferado Nacional', 1, 0.000, 1.000, 1, 1, 4),
+	(12, 198, 'Antigüedad', 0, 0.000, 1.000, 1, 4, 1),
+	(13, 301, 'Aporte Jub. S.I.P.A.', 1, 0.000, 11.000, 3, 3, 1),
+	(14, 302, 'Aporte Ley 19.032', 1, 0.000, 3.000, 3, 3, 1),
+	(15, 304, 'Sindicato', 1, 0.000, 2.500, 3, 3, 1),
+	(18, 305, 'Seguro Convenio', 1, 377.620, 1.000, 3, 3, 1),
+	(19, 398, 'Obra Social', 1, 0.000, 3.000, 3, 3, 1);
 /*!40000 ALTER TABLE `conceptos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla liquidacion.conceptosdetalle
@@ -255,6 +292,13 @@ REPLACE INTO `convenio` (`ID`, `codigo`, `descripcion`, `numero`, `año`) VALUES
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarCategoria`(p0 int)
 delete from categoria 
+where ID = p0//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento liquidacion.eliminarConcepto
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarConcepto`(p0 int)
+delete from conceptos
 where ID = p0//
 DELIMITER ;
 
@@ -428,6 +472,39 @@ numero = p1,
 descripcion = p2,
 importe = p3,
 convenio_ID = p4
+where c.ID = p0;
+COMMIT;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento liquidacion.modificarConcepto
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarConcepto`(
+	IN `p0` int,
+	IN `p1` int,
+	IN `p2` varchar(45),
+	IN `p3` int,
+	IN `p4` decimal(12,3),
+	IN `p5` decimal(9,3),
+	IN `p6` int,
+	IN `p7` int,
+	IN `p8` int
+
+
+
+)
+BEGIN
+START TRANSACTION;
+update conceptos c
+SET
+numero=p1,
+descripcion=p2,
+cantidad=p3,
+importe=p4,
+factor=p5,
+tipoConcepto_ID=p6,
+ingresa_ID=p7,
+tipoContrato_ID=p8
 where c.ID = p0;
 COMMIT;
 END//
@@ -652,7 +729,7 @@ CREATE TABLE IF NOT EXISTS `tipoconcepto` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla liquidacion.tipoconcepto: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla liquidacion.tipoconcepto: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `tipoconcepto` DISABLE KEYS */;
 REPLACE INTO `tipoconcepto` (`ID`, `descripcion`) VALUES
 	(1, 'Remunerativo'),
@@ -712,10 +789,16 @@ DELIMITER ;
 
 -- Volcando estructura para procedimiento liquidacion.verConceptos
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `verConceptos`()
-select *,tc.descripcion
+CREATE DEFINER=`root`@`localhost` PROCEDURE `verConceptos`(
+	IN `p0` INT
+
+)
+select c.id,c.numero,c.descripcion,c.cantidad,c.importe,c.factor,c.tipoConcepto_ID,c.ingresa_ID,c.tipoContrato_ID,tc.descripcion,i.descripcion
 from conceptos c
-inner join tipoConcepto tc on c.tipoConcepto_ID=tc.ID//
+inner join tipoconcepto tc on c.tipoConcepto_ID=tc.ID
+inner join ingresa i on c.ingresa_ID = i.ID
+where c.tipoContrato_ID = p0
+order by c.numero//
 DELIMITER ;
 
 -- Volcando estructura para procedimiento liquidacion.VerConvenio

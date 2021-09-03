@@ -47,6 +47,7 @@ namespace Liquidacion
             this.obraSocialToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.conceptosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.conveniosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.liquidarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,6 +105,8 @@ namespace Liquidacion
             // 
             // liquidacionToolStripMenuItem
             // 
+            this.liquidacionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.liquidarToolStripMenuItem});
             this.liquidacionToolStripMenuItem.Name = "liquidacionToolStripMenuItem";
             this.liquidacionToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.liquidacionToolStripMenuItem.Text = "Liquidacion";
@@ -160,30 +163,37 @@ namespace Liquidacion
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
-            this.editarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.editarToolStripMenuItem.Text = "Categorias";
             this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
             // obraSocialToolStripMenuItem1
             // 
             this.obraSocialToolStripMenuItem1.Name = "obraSocialToolStripMenuItem1";
-            this.obraSocialToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.obraSocialToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.obraSocialToolStripMenuItem1.Text = "Obra Social";
             this.obraSocialToolStripMenuItem1.Click += new System.EventHandler(this.obraSocialToolStripMenuItem1_Click);
             // 
             // conceptosToolStripMenuItem1
             // 
             this.conceptosToolStripMenuItem1.Name = "conceptosToolStripMenuItem1";
-            this.conceptosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.conceptosToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.conceptosToolStripMenuItem1.Text = "Conceptos";
             this.conceptosToolStripMenuItem1.Click += new System.EventHandler(this.conceptosToolStripMenuItem1_Click);
             // 
             // conveniosToolStripMenuItem
             // 
             this.conveniosToolStripMenuItem.Name = "conveniosToolStripMenuItem";
-            this.conveniosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.conveniosToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.conveniosToolStripMenuItem.Text = "Convenios";
             this.conveniosToolStripMenuItem.Click += new System.EventHandler(this.conveniosToolStripMenuItem_Click);
+            // 
+            // liquidarToolStripMenuItem
+            // 
+            this.liquidarToolStripMenuItem.Name = "liquidarToolStripMenuItem";
+            this.liquidarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.liquidarToolStripMenuItem.Text = "Liquidar";
+            this.liquidarToolStripMenuItem.Click += new System.EventHandler(this.liquidarToolStripMenuItem_Click);
             // 
             // Principal
             // 
@@ -226,6 +236,7 @@ namespace Liquidacion
         private System.Windows.Forms.ToolStripMenuItem obraSocialToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem conceptosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem conveniosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem liquidarToolStripMenuItem;
     }
 }
 
