@@ -37,6 +37,7 @@ namespace Liquidacion
             this.listadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novedadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.liquidacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.liquidarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.libroDeSueldosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.empresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +48,6 @@ namespace Liquidacion
             this.obraSocialToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.conceptosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.conveniosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.liquidarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,6 +110,13 @@ namespace Liquidacion
             this.liquidacionToolStripMenuItem.Name = "liquidacionToolStripMenuItem";
             this.liquidacionToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.liquidacionToolStripMenuItem.Text = "Liquidacion";
+            // 
+            // liquidarToolStripMenuItem
+            // 
+            this.liquidarToolStripMenuItem.Name = "liquidarToolStripMenuItem";
+            this.liquidarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.liquidarToolStripMenuItem.Text = "Liquidar";
+            this.liquidarToolStripMenuItem.Click += new System.EventHandler(this.liquidarToolStripMenuItem_Click);
             // 
             // libroDeSueldosToolStripMenuItem
             // 
@@ -188,13 +195,6 @@ namespace Liquidacion
             this.conveniosToolStripMenuItem.Text = "Convenios";
             this.conveniosToolStripMenuItem.Click += new System.EventHandler(this.conveniosToolStripMenuItem_Click);
             // 
-            // liquidarToolStripMenuItem
-            // 
-            this.liquidarToolStripMenuItem.Name = "liquidarToolStripMenuItem";
-            this.liquidarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.liquidarToolStripMenuItem.Text = "Liquidar";
-            this.liquidarToolStripMenuItem.Click += new System.EventHandler(this.liquidarToolStripMenuItem_Click);
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,6 +210,7 @@ namespace Liquidacion
             this.Name = "Principal";
             this.Text = "Liquidacion";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Principal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

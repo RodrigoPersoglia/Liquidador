@@ -107,5 +107,10 @@ namespace Liquidacion
             liquidacion.Show();
 
         }
+
+        private void Principal_Load(object sender, EventArgs e)
+        {
+            AutoClosingMessageBox.Show("Bienvenido", ".EXE Soluciones informáticas", 1200);
+        }
     }
 }

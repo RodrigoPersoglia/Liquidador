@@ -694,6 +694,214 @@ namespace Liquidacion
                 MessageBox.Show("Concepto Eliminado");
             }
             catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+            
+        }
+
+        //Arreglar
+        public static Empleado ObtenerEmpleado(string busqueda)
+        {
+            Empleado empleado = new Empleado();
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            MySqlDataReader reader;
+            conectar.Open();
+            try
+            {
+                MySqlCommand comand = new MySqlCommand("ObtenerEmpleado", conectar);
+                comand.CommandType = CommandType.StoredProcedure;
+                comand.Parameters.AddWithValue("@p1", busqueda);
+                reader = comand.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                if (dt.Rows.Count == 1)
+                {
+                    foreach (DataRow x in dt.Rows)
+                    {
+
+
+                        empleado.id = (int)x[0];
+                        empleado.legajo = (int)x[1];
+                        empleado.nombre = (string)x[2];
+                        empleado.apellido = (string)x[3];
+                        empleado.tipoDni = (string)x[4];
+                        empleado.numeroDni = (int)x[5];
+                        //empleado.cuit = int.Parse(((int)x[6]).ToString() + ((int)x[7]).ToString() + ((int)x[8]).ToString());
+                        empleado.direccion = (string)x[9];
+                        empleado.localidad = (string)x[10];
+                        empleado.provincia = (string)x[11];
+                        empleado.fechaNacimiento = (DateTime)x[12];
+                        empleado.telefono = (string)x[13];
+                        empleado.celular = (string)x[14];
+                        empleado.fechaIngreso = (DateTime)x[15];
+                        empleado.mesesAnteriores = (int)x[16];
+
+                        if (((decimal)x[19]) > 0) { empleado.Sueldo = decimal.ToDouble((decimal)x[19]); }
+                        else { empleado.Sueldo = decimal.ToDouble((decimal)x[29]); }
+                        
+                        //tipoDocCBX.Text = (string)x[17]; // Por ahora no los necesito
+                        //tipoDocCBX.Text = (string)x[18];
+                        //if ((decimal)x[19] == 0) { checkBox1.Checked = true; SueldoAcordadoTBX.Text = ""; }
+                        //else { checkBox1.Checked = false; SueldoAcordadoTBX.Text = ((decimal)x[19]).ToString(); }
+                        //empleado.sueldoAcordado = (double)x[19];
+                        //turnoCBX.SelectedValue = (int)x[20];
+                        //obraSocialCBX.SelectedValue = (int)x[21];
+                        // sucursalCBX.SelectedValue = (int)x[24];
+                        empleado.Convenio = (int)x[25];
+                        empleado.Contrato = (int)x[22];
+                        //ConvenioCBX_SelectionChangeCommitted(sender, e);
+                        //tipoContratoCBX.SelectedValue = (int)x[22];
+                        //tipoContratoCBX_SelectionChangeCommitted(sender, e);
+                        //categoriaCBX.SelectedValue = (int)x[23];
+
+                        //LegajoTBX.Text = empleado.legajo.ToString();
+                        //EmpleadoTBX.Text = empleado.nombre + " " + empleado.apellido;
+
+                    }
+
+                }
+                else
+                {
+
+                
+
+
+                    BusquedaRapida selec = new BusquedaRapida("legajo", "nombre", "apellido", "empleado");
+                DialogResult resultado = selec.ShowDialog();
+                int id = selec.IDBusqueda;
+                string consulta5 = "select * from empleado e where e.id=" + id.ToString() + " limit 1";
+                comand = new MySqlCommand(consulta5, conectar);
+                reader = comand.ExecuteReader();
+                dt = new DataTable();
+                dt.Load(reader);
+                if (dt.Rows.Count == 0)
+                {
+                        empleado = null;
+                        throw new ExisteException();
+                        
+                }
+
+                    if (dt.Rows.Count == 1)
+                    {
+                        foreach (DataRow x in dt.Rows)
+                        {
+
+
+                            empleado.id = (int)x[0];
+                            empleado.legajo = (int)x[1];
+                            empleado.nombre = (string)x[2];
+                            empleado.apellido = (string)x[3];
+                            empleado.tipoDni = (string)x[4];
+                            empleado.numeroDni = (int)x[5];
+                            //empleado.cuit = int.Parse(((int)x[6]).ToString() + ((int)x[7]).ToString() + ((int)x[8]).ToString());
+                            empleado.direccion = (string)x[9];
+                            empleado.localidad = (string)x[10];
+                            empleado.provincia = (string)x[11];
+                            empleado.fechaNacimiento = (DateTime)x[12];
+                            empleado.telefono = (string)x[13];
+                            empleado.celular = (string)x[14];
+                            empleado.fechaIngreso = (DateTime)x[15];
+                            empleado.mesesAnteriores = (int)x[16];
+                            //tipoDocCBX.Text = (string)x[17]; // Por ahora no los necesito
+                            //tipoDocCBX.Text = (string)x[18];
+                            //if ((decimal)x[19] == 0) { checkBox1.Checked = true; SueldoAcordadoTBX.Text = ""; }
+                            //else { checkBox1.Checked = false; SueldoAcordadoTBX.Text = ((decimal)x[19]).ToString(); }
+                            //empleado.sueldoAcordado = (double)x[19];
+                            //turnoCBX.SelectedValue = (int)x[20];
+                            //obraSocialCBX.SelectedValue = (int)x[21];
+                            // sucursalCBX.SelectedValue = (int)x[24];
+                            empleado.Convenio = (int)x[25];
+                            empleado.Contrato = (int)x[22];
+                            //ConvenioCBX_SelectionChangeCommitted(sender, e);
+                            //tipoContratoCBX.SelectedValue = (int)x[22];
+                            //tipoContratoCBX_SelectionChangeCommitted(sender, e);
+                            //categoriaCBX.SelectedValue = (int)x[23];
+
+                            //LegajoTBX.Text = empleado.legajo.ToString();
+                            //EmpleadoTBX.Text = empleado.nombre + " " + empleado.apellido;
+
+                        }
+
+                    }
+                }
+
+                return empleado;
+            }
+            catch (ExisteException)
+            {
+                MessageBox.Show("No se ha seleccionado a ningún empleado");return empleado; //ID = 0;
+            }
+            catch (Exception ex) { MessageBox.Show("Se produjo el siguiente error: " + ex.Message); return empleado; }
+            finally { conectar.Close(); }
+        }
+
+
+        private static Concepto completarConcepto(DataTable dt) //Metodo Auxiliar
+        {
+            Concepto concepto = new Concepto();
+            foreach (DataRow x in dt.Rows)
+            {
+                concepto.Id = (int)x[0];
+                concepto.Numero = (int)x[1];
+                concepto.Descripcion = (string)x[2];
+                concepto.Cantidad = (int)x[3];
+                concepto.Importe = decimal.ToDouble((decimal)x[4]);
+                concepto.Factor = decimal.ToDouble((decimal)x[5]);
+                concepto.TipoConcepto = (int)x[6];
+                concepto.Ingresa = (int)x[7];
+                concepto.TipoContrato = (int)x[8];
+            }
+            return concepto;
+        }
+        public static Concepto ObtenerConcepto(int contrato, int NumConcepto)
+        {
+           
+            Concepto concepto = new Concepto();
+            MySqlConnection conectar = Conexion.ObtenerConexion();
+            MySqlDataReader reader;
+            conectar.Open();
+            try
+            {
+                MySqlCommand comand = new MySqlCommand("verConcepto", conectar);
+                comand.CommandType = CommandType.StoredProcedure;
+                comand.Parameters.AddWithValue("@p1", contrato);
+                comand.Parameters.AddWithValue("@p2", NumConcepto);
+                reader = comand.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+
+                if (dt.Rows.Count == 1)
+                {
+                    concepto = completarConcepto(dt);
+                }
+                else
+                {
+                    BusquedaRapida selec = new BusquedaRapida("numero", "descripcion", "conceptos","t.tipoContrato_ID = ", contrato);
+                    DialogResult resultado = selec.ShowDialog();
+                    int id = selec.IDBusqueda;
+                    string consulta5 = "select * from conceptos e where e.id=" + id.ToString() + " limit 1";
+                    comand = new MySqlCommand(consulta5, conectar);
+                    reader = comand.ExecuteReader();
+                    dt = new DataTable();
+                    dt.Load(reader);
+                    if (dt.Rows.Count == 0)
+                    {
+                        concepto = null;
+                        //throw new ExisteException();
+                    }
+
+                    if (dt.Rows.Count == 1)
+                    {
+                        concepto = completarConcepto(dt);
+
+                    }
+                }
+
+                return concepto;
+        }
+            catch (ExisteException)
+            {
+                MessageBox.Show("No se ha seleccionado a ningún empleado"); return concepto;
+            }
+            catch (Exception ex) { MessageBox.Show("Se produjo el siguiente error: " + ex.Message); return concepto; }
             finally { conectar.Close(); }
         }
 

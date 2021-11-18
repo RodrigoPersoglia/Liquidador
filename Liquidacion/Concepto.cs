@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Liquidacion
 {
-    class Concepto
+    public class Concepto
     {
         
         public int Id { get; set; }
@@ -33,6 +33,10 @@ namespace Liquidacion
             
         }
 
+        public Concepto()
+        {
+
+        }
 
     }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Liquidacion
 {
-    class Empleado
+    public class Empleado
     {
         public int id { get; set; }
         public int legajo { get; set; }
@@ -14,7 +14,7 @@ namespace Liquidacion
         public string apellido { get; set; }
         public string tipoDni { get; set; }
         public int numeroDni { get; set; }
-        public int cuit { get; set; }
+        public long cuit { get; set; }
         public string direccion { get; set; }
         public string localidad { get; set; }
         public string provincia { get; set; }
@@ -25,8 +25,10 @@ namespace Liquidacion
         public int mesesAnteriores { get; set; }
         public bool activo { get; set; }
         public DateTime fechaBaja { get; set; }
-        public double sueldoAcordado { get; set; }
-        public double SueldoConvenio { get; set; }
+        //public double sueldoAcordado { get; set; }
+        public double Sueldo { get; set; }
 
+        public int Convenio { get; set; }
+        public int Contrato { get; set; }
     }
 }

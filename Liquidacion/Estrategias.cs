@@ -10,10 +10,10 @@ namespace Liquidacion
     {
         public Concepto liquidar(Empleado empleado, double ingreso, Concepto concepto)
         {
-            double sueldo;
-            if (empleado.sueldoAcordado > 0) {sueldo = empleado.sueldoAcordado;}
-            else { sueldo = empleado.SueldoConvenio;}
-            double importe = sueldo * ingreso * concepto.Factor;
+            //double sueldo;
+            //if (empleado.sueldoAcordado > 0) {sueldo = empleado.sueldoAcordado;}
+            //else { sueldo = empleado.SueldoConvenio;}
+            double importe = empleado.Sueldo * ingreso * concepto.Factor;
             concepto.Cantidad = (int)ingreso;
             concepto.Importe = importe;
             return concepto;
@@ -23,10 +23,10 @@ namespace Liquidacion
     {
         public Concepto liquidar(Empleado empleado, double ingreso, Concepto concepto)
         {
-            double sueldo;
-            if (empleado.sueldoAcordado > 0) { sueldo = empleado.sueldoAcordado; }
-            else { sueldo = empleado.SueldoConvenio; }
-            double importe = sueldo /30 * ingreso * concepto.Factor;
+            //double sueldo;
+            //if (empleado.sueldoAcordado > 0) { sueldo = empleado.sueldoAcordado; }
+            //else { sueldo = empleado.SueldoConvenio; }
+            double importe = empleado.Sueldo / 30 * ingreso * concepto.Factor;
             concepto.Cantidad = (int)ingreso;
             concepto.Importe = importe;
             return concepto;
