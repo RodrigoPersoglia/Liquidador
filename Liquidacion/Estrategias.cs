@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Liquidacion
 {
@@ -10,9 +11,6 @@ namespace Liquidacion
     {
         public Concepto liquidar(Empleado empleado, double ingreso, Concepto concepto)
         {
-            //double sueldo;
-            //if (empleado.sueldoAcordado > 0) {sueldo = empleado.sueldoAcordado;}
-            //else { sueldo = empleado.SueldoConvenio;}
             double importe = empleado.Sueldo * ingreso * concepto.Factor;
             concepto.Cantidad = (int)ingreso;
             concepto.Importe = importe;
@@ -23,9 +21,6 @@ namespace Liquidacion
     {
         public Concepto liquidar(Empleado empleado, double ingreso, Concepto concepto)
         {
-            //double sueldo;
-            //if (empleado.sueldoAcordado > 0) { sueldo = empleado.sueldoAcordado; }
-            //else { sueldo = empleado.SueldoConvenio; }
             double importe = empleado.Sueldo / 30 * ingreso * concepto.Factor;
             concepto.Cantidad = (int)ingreso;
             concepto.Importe = importe;
@@ -37,10 +32,33 @@ namespace Liquidacion
     {
         public Concepto liquidar(Empleado empleado, double ingreso, Concepto concepto)
         {
-            double importe = concepto.Cantidad * ingreso * concepto.Factor;
+            double importe = concepto.Cantidad * ingreso;
             concepto.Importe = importe;
             return concepto;
         }
     }
 
+
+    class PorPorcentaje : ILiquidacion
+    {
+        public Concepto liquidar(Empleado empleado, double ingreso, Concepto concepto)
+        {
+            double importe = concepto.Cantidad * concepto.Factor /100 * ingreso;
+            concepto.Importe = importe;
+            return concepto;
+        }
+    }
+
+
+    class PorAntigüedad : ILiquidacion
+    {
+        public Concepto liquidar(Empleado empleado, double ingreso, Concepto concepto)
+        {
+            int cantidad = (DateTime.Today - empleado.fechaIngreso).Days;
+            cantidad = (int)Math.Truncate(cantidad / 365.25 + empleado.mesesAnteriores / 12) ;
+            double importe = (cantidad * ingreso)/100;
+            concepto.Importe = importe;
+            return concepto;
+        }
+    }
 }

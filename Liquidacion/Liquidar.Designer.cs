@@ -30,6 +30,7 @@ namespace Liquidacion
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label6 = new System.Windows.Forms.Label();
             this.DniTXB = new System.Windows.Forms.TextBox();
             this.BuscarEmpleadoBTN = new System.Windows.Forms.Button();
             this.EmpleadoTBX = new System.Windows.Forms.TextBox();
@@ -46,6 +47,7 @@ namespace Liquidacion
             this.NumConceptoTBX = new System.Windows.Forms.TextBox();
             this.Agregar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.Cuadro = new System.Windows.Forms.DataGridView();
             this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,25 +55,32 @@ namespace Liquidacion
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Exento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.ExentoTXT = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.RemunerativoTXT = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.DescuentosTXT = new System.Windows.Forms.TextBox();
+            this.Descuentos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ingreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RedondeoTXT = new System.Windows.Forms.TextBox();
+            this.CheckRedondeo = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.TotalTXT = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.DescuentosTXT = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.RemunerativoTXT = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.ExentoTXT = new System.Windows.Forms.TextBox();
+            this.MesCBX = new System.Windows.Forms.ComboBox();
+            this.PeriodoCBX = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.EmisionNum = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Cuadro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Cuadro)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EmisionNum)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -84,6 +93,10 @@ namespace Liquidacion
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.splitContainer1.Panel1.Controls.Add(this.EmisionNum);
+            this.splitContainer1.Panel1.Controls.Add(this.label9);
+            this.splitContainer1.Panel1.Controls.Add(this.PeriodoCBX);
+            this.splitContainer1.Panel1.Controls.Add(this.MesCBX);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
             this.splitContainer1.Panel1.Controls.Add(this.DniTXB);
             this.splitContainer1.Panel1.Controls.Add(this.BuscarEmpleadoBTN);
@@ -107,14 +120,25 @@ namespace Liquidacion
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(644, 561);
+            this.splitContainer1.Size = new System.Drawing.Size(743, 561);
             this.splitContainer1.SplitterDistance = 122;
             this.splitContainer1.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label6.Location = new System.Drawing.Point(12, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 15);
+            this.label6.TabIndex = 32;
+            this.label6.Text = "Empleado:";
             // 
             // DniTXB
             // 
             this.DniTXB.BackColor = System.Drawing.SystemColors.Window;
-            this.DniTXB.Location = new System.Drawing.Point(374, 10);
+            this.DniTXB.Location = new System.Drawing.Point(207, 36);
             this.DniTXB.Name = "DniTXB";
             this.DniTXB.ReadOnly = true;
             this.DniTXB.Size = new System.Drawing.Size(104, 20);
@@ -162,7 +186,7 @@ namespace Liquidacion
             // 
             // EliminarBTN
             // 
-            this.EliminarBTN.Location = new System.Drawing.Point(557, 66);
+            this.EliminarBTN.Location = new System.Drawing.Point(656, 66);
             this.EliminarBTN.Name = "EliminarBTN";
             this.EliminarBTN.Size = new System.Drawing.Size(75, 23);
             this.EliminarBTN.TabIndex = 7;
@@ -172,7 +196,7 @@ namespace Liquidacion
             // 
             // ModificarBTN
             // 
-            this.ModificarBTN.Location = new System.Drawing.Point(557, 36);
+            this.ModificarBTN.Location = new System.Drawing.Point(656, 36);
             this.ModificarBTN.Name = "ModificarBTN";
             this.ModificarBTN.Size = new System.Drawing.Size(75, 23);
             this.ModificarBTN.TabIndex = 6;
@@ -227,7 +251,9 @@ namespace Liquidacion
             this.EstrategiaCBX.Items.AddRange(new object[] {
             "Por Hora",
             "Por Dia",
-            "Por Importe"});
+            "Por Importe",
+            "Por Porcentaje",
+            "Por Antigüedad"});
             this.EstrategiaCBX.Location = new System.Drawing.Point(76, 97);
             this.EstrategiaCBX.Name = "EstrategiaCBX";
             this.EstrategiaCBX.Size = new System.Drawing.Size(94, 21);
@@ -236,7 +262,7 @@ namespace Liquidacion
             // 
             // CancelarBTN
             // 
-            this.CancelarBTN.Location = new System.Drawing.Point(557, 95);
+            this.CancelarBTN.Location = new System.Drawing.Point(656, 95);
             this.CancelarBTN.Name = "CancelarBTN";
             this.CancelarBTN.Size = new System.Drawing.Size(75, 23);
             this.CancelarBTN.TabIndex = 8;
@@ -257,7 +283,7 @@ namespace Liquidacion
             // 
             // Agregar
             // 
-            this.Agregar.Location = new System.Drawing.Point(557, 7);
+            this.Agregar.Location = new System.Drawing.Point(656, 7);
             this.Agregar.Name = "Agregar";
             this.Agregar.Size = new System.Drawing.Size(75, 23);
             this.Agregar.TabIndex = 5;
@@ -276,6 +302,33 @@ namespace Liquidacion
             this.label3.TabIndex = 2;
             this.label3.Text = "Concepto:";
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.Cuadro);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.RedondeoTXT);
+            this.splitContainer2.Panel2.Controls.Add(this.CheckRedondeo);
+            this.splitContainer2.Panel2.Controls.Add(this.label8);
+            this.splitContainer2.Panel2.Controls.Add(this.TotalTXT);
+            this.splitContainer2.Panel2.Controls.Add(this.label7);
+            this.splitContainer2.Panel2.Controls.Add(this.DescuentosTXT);
+            this.splitContainer2.Panel2.Controls.Add(this.label5);
+            this.splitContainer2.Panel2.Controls.Add(this.RemunerativoTXT);
+            this.splitContainer2.Panel2.Controls.Add(this.label2);
+            this.splitContainer2.Panel2.Controls.Add(this.ExentoTXT);
+            this.splitContainer2.Size = new System.Drawing.Size(743, 435);
+            this.splitContainer2.SplitterDistance = 291;
+            this.splitContainer2.TabIndex = 1;
+            // 
             // Cuadro
             // 
             this.Cuadro.AllowUserToAddRows = false;
@@ -287,13 +340,15 @@ namespace Liquidacion
             this.Descripcion,
             this.Cantidad,
             this.Importe,
-            this.Exento});
+            this.Exento,
+            this.Descuentos,
+            this.Ingreso});
             this.Cuadro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Cuadro.Location = new System.Drawing.Point(0, 0);
             this.Cuadro.Name = "Cuadro";
             this.Cuadro.ReadOnly = true;
             this.Cuadro.RowHeadersVisible = false;
-            this.Cuadro.Size = new System.Drawing.Size(644, 222);
+            this.Cuadro.Size = new System.Drawing.Size(743, 291);
             this.Cuadro.TabIndex = 0;
             this.Cuadro.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Cuadro_CellClick);
             // 
@@ -338,69 +393,87 @@ namespace Liquidacion
             this.Exento.Name = "Exento";
             this.Exento.ReadOnly = true;
             // 
-            // splitContainer2
+            // Descuentos
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.Descuentos.HeaderText = "Descuentos";
+            this.Descuentos.Name = "Descuentos";
+            this.Descuentos.ReadOnly = true;
             // 
-            // splitContainer2.Panel1
+            // Ingreso
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.Cuadro);
+            this.Ingreso.HeaderText = "Ingreso";
+            this.Ingreso.Name = "Ingreso";
+            this.Ingreso.ReadOnly = true;
+            this.Ingreso.Visible = false;
             // 
-            // splitContainer2.Panel2
+            // RedondeoTXT
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.label8);
-            this.splitContainer2.Panel2.Controls.Add(this.TotalTXT);
-            this.splitContainer2.Panel2.Controls.Add(this.label7);
-            this.splitContainer2.Panel2.Controls.Add(this.DescuentosTXT);
-            this.splitContainer2.Panel2.Controls.Add(this.label5);
-            this.splitContainer2.Panel2.Controls.Add(this.RemunerativoTXT);
-            this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Panel2.Controls.Add(this.ExentoTXT);
-            this.splitContainer2.Size = new System.Drawing.Size(644, 435);
-            this.splitContainer2.SplitterDistance = 222;
-            this.splitContainer2.TabIndex = 1;
+            this.RedondeoTXT.Location = new System.Drawing.Point(93, 18);
+            this.RedondeoTXT.Name = "RedondeoTXT";
+            this.RedondeoTXT.Size = new System.Drawing.Size(100, 20);
+            this.RedondeoTXT.TabIndex = 33;
             // 
-            // label6
+            // CheckRedondeo
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label6.Location = new System.Drawing.Point(12, 12);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 15);
-            this.label6.TabIndex = 32;
-            this.label6.Text = "Empleado:";
+            this.CheckRedondeo.AutoSize = true;
+            this.CheckRedondeo.Checked = true;
+            this.CheckRedondeo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckRedondeo.Location = new System.Drawing.Point(11, 20);
+            this.CheckRedondeo.Name = "CheckRedondeo";
+            this.CheckRedondeo.Size = new System.Drawing.Size(76, 17);
+            this.CheckRedondeo.TabIndex = 32;
+            this.CheckRedondeo.Text = "Redondeo";
+            this.CheckRedondeo.UseVisualStyleBackColor = true;
+            this.CheckRedondeo.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // label2
+            // label8
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label2.Location = new System.Drawing.Point(473, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 15);
-            this.label2.TabIndex = 25;
-            this.label2.Text = "EXENTO";
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label8.Location = new System.Drawing.Point(572, 100);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 15);
+            this.label8.TabIndex = 31;
+            this.label8.Text = "TOTAL";
             // 
-            // ExentoTXT
+            // TotalTXT
             // 
-            this.ExentoTXT.Location = new System.Drawing.Point(532, 36);
-            this.ExentoTXT.MaxLength = 15;
-            this.ExentoTXT.Name = "ExentoTXT";
-            this.ExentoTXT.ReadOnly = true;
-            this.ExentoTXT.Size = new System.Drawing.Size(100, 20);
-            this.ExentoTXT.TabIndex = 24;
-            this.ExentoTXT.Text = "0";
+            this.TotalTXT.Location = new System.Drawing.Point(631, 98);
+            this.TotalTXT.MaxLength = 15;
+            this.TotalTXT.Name = "TotalTXT";
+            this.TotalTXT.ReadOnly = true;
+            this.TotalTXT.Size = new System.Drawing.Size(100, 20);
+            this.TotalTXT.TabIndex = 30;
+            this.TotalTXT.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label7.Location = new System.Drawing.Point(544, 74);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(78, 15);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "DESCUENTOS";
+            // 
+            // DescuentosTXT
+            // 
+            this.DescuentosTXT.Location = new System.Drawing.Point(631, 72);
+            this.DescuentosTXT.MaxLength = 15;
+            this.DescuentosTXT.Name = "DescuentosTXT";
+            this.DescuentosTXT.ReadOnly = true;
+            this.DescuentosTXT.Size = new System.Drawing.Size(100, 20);
+            this.DescuentosTXT.TabIndex = 28;
+            this.DescuentosTXT.Text = "0";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label5.Location = new System.Drawing.Point(429, 12);
+            this.label5.Location = new System.Drawing.Point(528, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(94, 15);
             this.label5.TabIndex = 27;
@@ -409,7 +482,7 @@ namespace Liquidacion
             // 
             // RemunerativoTXT
             // 
-            this.RemunerativoTXT.Location = new System.Drawing.Point(532, 10);
+            this.RemunerativoTXT.Location = new System.Drawing.Point(631, 20);
             this.RemunerativoTXT.MaxLength = 15;
             this.RemunerativoTXT.Name = "RemunerativoTXT";
             this.RemunerativoTXT.ReadOnly = true;
@@ -417,54 +490,91 @@ namespace Liquidacion
             this.RemunerativoTXT.TabIndex = 26;
             this.RemunerativoTXT.Text = "0";
             // 
-            // label7
+            // label2
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label7.Location = new System.Drawing.Point(445, 64);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(78, 15);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "DESCUENTOS";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label2.Location = new System.Drawing.Point(572, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 15);
+            this.label2.TabIndex = 25;
+            this.label2.Text = "EXENTO";
             // 
-            // DescuentosTXT
+            // ExentoTXT
             // 
-            this.DescuentosTXT.Location = new System.Drawing.Point(532, 62);
-            this.DescuentosTXT.MaxLength = 15;
-            this.DescuentosTXT.Name = "DescuentosTXT";
-            this.DescuentosTXT.ReadOnly = true;
-            this.DescuentosTXT.Size = new System.Drawing.Size(100, 20);
-            this.DescuentosTXT.TabIndex = 28;
-            this.DescuentosTXT.Text = "0";
+            this.ExentoTXT.Location = new System.Drawing.Point(631, 46);
+            this.ExentoTXT.MaxLength = 15;
+            this.ExentoTXT.Name = "ExentoTXT";
+            this.ExentoTXT.ReadOnly = true;
+            this.ExentoTXT.Size = new System.Drawing.Size(100, 20);
+            this.ExentoTXT.TabIndex = 24;
+            this.ExentoTXT.Text = "0";
             // 
-            // label8
+            // MesCBX
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label8.Location = new System.Drawing.Point(473, 90);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 15);
-            this.label8.TabIndex = 31;
-            this.label8.Text = "TOTAL";
+            this.MesCBX.FormattingEnabled = true;
+            this.MesCBX.ItemHeight = 13;
+            this.MesCBX.Items.AddRange(new object[] {
+            "Por Hora",
+            "Por Dia",
+            "Por Importe",
+            "Por Porcentaje",
+            "Por Antigüedad"});
+            this.MesCBX.Location = new System.Drawing.Point(411, 10);
+            this.MesCBX.Name = "MesCBX";
+            this.MesCBX.Size = new System.Drawing.Size(151, 21);
+            this.MesCBX.TabIndex = 33;
             // 
-            // TotalTXT
+            // PeriodoCBX
             // 
-            this.TotalTXT.Location = new System.Drawing.Point(532, 88);
-            this.TotalTXT.MaxLength = 15;
-            this.TotalTXT.Name = "TotalTXT";
-            this.TotalTXT.ReadOnly = true;
-            this.TotalTXT.Size = new System.Drawing.Size(100, 20);
-            this.TotalTXT.TabIndex = 30;
-            this.TotalTXT.Text = "0";
+            this.PeriodoCBX.FormattingEnabled = true;
+            this.PeriodoCBX.ItemHeight = 13;
+            this.PeriodoCBX.Items.AddRange(new object[] {
+            "Por Hora",
+            "Por Dia",
+            "Por Importe",
+            "Por Porcentaje",
+            "Por Antigüedad"});
+            this.PeriodoCBX.Location = new System.Drawing.Point(411, 48);
+            this.PeriodoCBX.Name = "PeriodoCBX";
+            this.PeriodoCBX.Size = new System.Drawing.Size(151, 21);
+            this.PeriodoCBX.TabIndex = 34;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label9.Location = new System.Drawing.Point(444, 82);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 15);
+            this.label9.TabIndex = 35;
+            this.label9.Text = "Emisión:";
+            // 
+            // EmisionNum
+            // 
+            this.EmisionNum.Location = new System.Drawing.Point(503, 81);
+            this.EmisionNum.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.EmisionNum.Name = "EmisionNum";
+            this.EmisionNum.Size = new System.Drawing.Size(59, 20);
+            this.EmisionNum.TabIndex = 36;
+            this.EmisionNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // Liquidar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(644, 561);
+            this.ClientSize = new System.Drawing.Size(743, 561);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Name = "Liquidar";
@@ -476,12 +586,13 @@ namespace Liquidacion
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Cuadro)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Cuadro)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EmisionNum)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -506,12 +617,6 @@ namespace Liquidacion
         private System.Windows.Forms.TextBox LegajoTBX;
         private System.Windows.Forms.Button buscarConceptoBTN;
         private System.Windows.Forms.TextBox DniTXB;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numero;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Importe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Exento;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label label8;
@@ -522,5 +627,19 @@ namespace Liquidacion
         private System.Windows.Forms.TextBox RemunerativoTXT;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox ExentoTXT;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Importe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Exento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descuentos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ingreso;
+        private System.Windows.Forms.CheckBox CheckRedondeo;
+        private System.Windows.Forms.TextBox RedondeoTXT;
+        private System.Windows.Forms.ComboBox MesCBX;
+        private System.Windows.Forms.ComboBox PeriodoCBX;
+        private System.Windows.Forms.NumericUpDown EmisionNum;
+        private System.Windows.Forms.Label label9;
     }
 }

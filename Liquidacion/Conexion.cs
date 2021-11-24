@@ -724,7 +724,7 @@ namespace Liquidacion
                         empleado.apellido = (string)x[3];
                         empleado.tipoDni = (string)x[4];
                         empleado.numeroDni = (int)x[5];
-                        //empleado.cuit = int.Parse(((int)x[6]).ToString() + ((int)x[7]).ToString() + ((int)x[8]).ToString());
+                        empleado.cuit = ((int)x[6]).ToString() + ((int)x[7]).ToString() + ((int)x[8]).ToString();
                         empleado.direccion = (string)x[9];
                         empleado.localidad = (string)x[10];
                         empleado.provincia = (string)x[11];
@@ -765,23 +765,24 @@ namespace Liquidacion
 
 
                     BusquedaRapida selec = new BusquedaRapida("legajo", "nombre", "apellido", "empleado");
-                DialogResult resultado = selec.ShowDialog();
-                int id = selec.IDBusqueda;
-                string consulta5 = "select * from empleado e where e.id=" + id.ToString() + " limit 1";
-                comand = new MySqlCommand(consulta5, conectar);
-                reader = comand.ExecuteReader();
-                dt = new DataTable();
-                dt.Load(reader);
-                if (dt.Rows.Count == 0)
+                    DialogResult resultado = selec.ShowDialog();
+                    int id = selec.IDBusqueda;
+                    comand = new MySqlCommand("ObtenerEmpleado", conectar);
+                    comand.CommandType = CommandType.StoredProcedure;
+                    comand.Parameters.AddWithValue("@p1", id.ToString());
+                    reader = comand.ExecuteReader();
+                    DataTable dt2 = new DataTable();
+                    dt2.Load(reader);
+                if (dt2.Rows.Count == 0)
                 {
                         empleado = null;
                         throw new ExisteException();
                         
                 }
 
-                    if (dt.Rows.Count == 1)
+                    if (dt2.Rows.Count == 1)
                     {
-                        foreach (DataRow x in dt.Rows)
+                        foreach (DataRow x in dt2.Rows)
                         {
 
 
@@ -791,7 +792,7 @@ namespace Liquidacion
                             empleado.apellido = (string)x[3];
                             empleado.tipoDni = (string)x[4];
                             empleado.numeroDni = (int)x[5];
-                            //empleado.cuit = int.Parse(((int)x[6]).ToString() + ((int)x[7]).ToString() + ((int)x[8]).ToString());
+                            empleado.cuit = ((int)x[6]).ToString() + ((int)x[7]).ToString() + ((int)x[8]).ToString();
                             empleado.direccion = (string)x[9];
                             empleado.localidad = (string)x[10];
                             empleado.provincia = (string)x[11];
@@ -800,6 +801,8 @@ namespace Liquidacion
                             empleado.celular = (string)x[14];
                             empleado.fechaIngreso = (DateTime)x[15];
                             empleado.mesesAnteriores = (int)x[16];
+                            if (((decimal)x[19]) > 0) { empleado.Sueldo = decimal.ToDouble((decimal)x[19]); }
+                            else { empleado.Sueldo = decimal.ToDouble((decimal)x[29]); }
                             //tipoDocCBX.Text = (string)x[17]; // Por ahora no los necesito
                             //tipoDocCBX.Text = (string)x[18];
                             //if ((decimal)x[19] == 0) { checkBox1.Checked = true; SueldoAcordadoTBX.Text = ""; }
@@ -827,7 +830,7 @@ namespace Liquidacion
             }
             catch (ExisteException)
             {
-                MessageBox.Show("No se ha seleccionado a ningún empleado");return empleado; //ID = 0;
+                MessageBox.Show("No se ha seleccionado a ningún empleado");return empleado;
             }
             catch (Exception ex) { MessageBox.Show("Se produjo el siguiente error: " + ex.Message); return empleado; }
             finally { conectar.Close(); }

@@ -14,7 +14,7 @@ namespace Liquidacion
         public string apellido { get; set; }
         public string tipoDni { get; set; }
         public int numeroDni { get; set; }
-        public long cuit { get; set; }
+        public string cuit { get; set; }
         public string direccion { get; set; }
         public string localidad { get; set; }
         public string provincia { get; set; }
