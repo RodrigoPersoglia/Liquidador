@@ -30,6 +30,10 @@ namespace Liquidacion
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.EmisionNum = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.PeriodoCBX = new System.Windows.Forms.ComboBox();
+            this.MesCBX = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.DniTXB = new System.Windows.Forms.TextBox();
             this.BuscarEmpleadoBTN = new System.Windows.Forms.Button();
@@ -67,20 +71,16 @@ namespace Liquidacion
             this.RemunerativoTXT = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ExentoTXT = new System.Windows.Forms.TextBox();
-            this.MesCBX = new System.Windows.Forms.ComboBox();
-            this.PeriodoCBX = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.EmisionNum = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EmisionNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Cuadro)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EmisionNum)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -123,6 +123,64 @@ namespace Liquidacion
             this.splitContainer1.Size = new System.Drawing.Size(743, 561);
             this.splitContainer1.SplitterDistance = 122;
             this.splitContainer1.TabIndex = 12;
+            // 
+            // EmisionNum
+            // 
+            this.EmisionNum.Location = new System.Drawing.Point(503, 81);
+            this.EmisionNum.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.EmisionNum.Name = "EmisionNum";
+            this.EmisionNum.Size = new System.Drawing.Size(59, 20);
+            this.EmisionNum.TabIndex = 36;
+            this.EmisionNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label9.Location = new System.Drawing.Point(444, 82);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 15);
+            this.label9.TabIndex = 35;
+            this.label9.Text = "Emisión:";
+            // 
+            // PeriodoCBX
+            // 
+            this.PeriodoCBX.FormattingEnabled = true;
+            this.PeriodoCBX.ItemHeight = 13;
+            this.PeriodoCBX.Items.AddRange(new object[] {
+            "Por Hora",
+            "Por Dia",
+            "Por Importe",
+            "Por Porcentaje",
+            "Por Antigüedad"});
+            this.PeriodoCBX.Location = new System.Drawing.Point(411, 48);
+            this.PeriodoCBX.Name = "PeriodoCBX";
+            this.PeriodoCBX.Size = new System.Drawing.Size(151, 21);
+            this.PeriodoCBX.TabIndex = 34;
+            // 
+            // MesCBX
+            // 
+            this.MesCBX.FormattingEnabled = true;
+            this.MesCBX.ItemHeight = 13;
+            this.MesCBX.Items.AddRange(new object[] {
+            "Por Hora",
+            "Por Dia",
+            "Por Importe",
+            "Por Porcentaje",
+            "Por Antigüedad"});
+            this.MesCBX.Location = new System.Drawing.Point(411, 10);
+            this.MesCBX.Name = "MesCBX";
+            this.MesCBX.Size = new System.Drawing.Size(151, 21);
+            this.MesCBX.TabIndex = 33;
             // 
             // label6
             // 
@@ -511,64 +569,6 @@ namespace Liquidacion
             this.ExentoTXT.TabIndex = 24;
             this.ExentoTXT.Text = "0";
             // 
-            // MesCBX
-            // 
-            this.MesCBX.FormattingEnabled = true;
-            this.MesCBX.ItemHeight = 13;
-            this.MesCBX.Items.AddRange(new object[] {
-            "Por Hora",
-            "Por Dia",
-            "Por Importe",
-            "Por Porcentaje",
-            "Por Antigüedad"});
-            this.MesCBX.Location = new System.Drawing.Point(411, 10);
-            this.MesCBX.Name = "MesCBX";
-            this.MesCBX.Size = new System.Drawing.Size(151, 21);
-            this.MesCBX.TabIndex = 33;
-            // 
-            // PeriodoCBX
-            // 
-            this.PeriodoCBX.FormattingEnabled = true;
-            this.PeriodoCBX.ItemHeight = 13;
-            this.PeriodoCBX.Items.AddRange(new object[] {
-            "Por Hora",
-            "Por Dia",
-            "Por Importe",
-            "Por Porcentaje",
-            "Por Antigüedad"});
-            this.PeriodoCBX.Location = new System.Drawing.Point(411, 48);
-            this.PeriodoCBX.Name = "PeriodoCBX";
-            this.PeriodoCBX.Size = new System.Drawing.Size(151, 21);
-            this.PeriodoCBX.TabIndex = 34;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label9.Location = new System.Drawing.Point(444, 82);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 15);
-            this.label9.TabIndex = 35;
-            this.label9.Text = "Emisión:";
-            // 
-            // EmisionNum
-            // 
-            this.EmisionNum.Location = new System.Drawing.Point(503, 81);
-            this.EmisionNum.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.EmisionNum.Name = "EmisionNum";
-            this.EmisionNum.Size = new System.Drawing.Size(59, 20);
-            this.EmisionNum.TabIndex = 36;
-            this.EmisionNum.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // Liquidar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -586,13 +586,13 @@ namespace Liquidacion
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.EmisionNum)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Cuadro)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EmisionNum)).EndInit();
             this.ResumeLayout(false);
 
         }
