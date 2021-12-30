@@ -71,6 +71,7 @@ namespace Liquidacion
             this.RemunerativoTXT = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ExentoTXT = new System.Windows.Forms.TextBox();
+            this.AñoNumeric = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -81,6 +82,7 @@ namespace Liquidacion
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Cuadro)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AñoNumeric)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -93,6 +95,7 @@ namespace Liquidacion
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.splitContainer1.Panel1.Controls.Add(this.AñoNumeric);
             this.splitContainer1.Panel1.Controls.Add(this.EmisionNum);
             this.splitContainer1.Panel1.Controls.Add(this.label9);
             this.splitContainer1.Panel1.Controls.Add(this.PeriodoCBX);
@@ -181,6 +184,7 @@ namespace Liquidacion
             this.MesCBX.Name = "MesCBX";
             this.MesCBX.Size = new System.Drawing.Size(151, 21);
             this.MesCBX.TabIndex = 33;
+            this.MesCBX.SelectionChangeCommitted += new System.EventHandler(this.MesCBX_SelectionChangeCommitted);
             // 
             // label6
             // 
@@ -569,6 +573,24 @@ namespace Liquidacion
             this.ExentoTXT.TabIndex = 24;
             this.ExentoTXT.Text = "0";
             // 
+            // AñoNumeric
+            // 
+            this.AñoNumeric.Location = new System.Drawing.Point(568, 11);
+            this.AñoNumeric.Maximum = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
+            this.AñoNumeric.Name = "AñoNumeric";
+            this.AñoNumeric.Size = new System.Drawing.Size(59, 20);
+            this.AñoNumeric.TabIndex = 37;
+            this.AñoNumeric.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.AñoNumeric.ValueChanged += new System.EventHandler(this.AñoNumeric_ValueChanged);
+            // 
             // Liquidar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -593,6 +615,7 @@ namespace Liquidacion
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Cuadro)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AñoNumeric)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -641,5 +664,6 @@ namespace Liquidacion
         private System.Windows.Forms.ComboBox PeriodoCBX;
         private System.Windows.Forms.NumericUpDown EmisionNum;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown AñoNumeric;
     }
 }

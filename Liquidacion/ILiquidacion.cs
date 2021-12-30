@@ -8,7 +8,7 @@ namespace Liquidacion
 {
     interface ILiquidacion
     {
-        Concepto liquidar(Empleado empleado,double ingreso, Concepto concepto);
+        Concepto liquidar(Empleado empleado,double ingreso, Concepto concepto, DateTime fechaLiquidacion);
 
     }
 }

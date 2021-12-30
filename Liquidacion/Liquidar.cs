@@ -22,8 +22,10 @@ namespace Liquidacion
         Empleado empleado;
         Concepto concepto;
         Calcular calculo;
+        DateTime fechaLiquidacion;
         private void Liquidar_Load(object sender, EventArgs e)
         {
+            AñoNumeric.Value = int.Parse(DateTime.Today.ToString("yyyy"));
             // COMBOBOX TURNO
             MySqlConnection conectar = Conexion.ObtenerConexion();
             conectar.Open();
@@ -127,9 +129,9 @@ namespace Liquidacion
             {
 
 
-                if (nuevaEstrategia != null && concepto!=null)
+                if (nuevaEstrategia != null && concepto!=null && fechaLiquidacion!= new DateTime(1,1,1))
                 {
-                    calculo = new Calcular(concepto, empleado, double.Parse(IngresaTBX.Text));
+                    calculo = new Calcular(concepto, empleado, double.Parse(IngresaTBX.Text),fechaLiquidacion);
                     calculo.CambiarEstrategia(nuevaEstrategia);
                     concepto = calculo.CalcularLiquidacion();
                     int n = Cuadro.Rows.Add();
@@ -162,10 +164,19 @@ namespace Liquidacion
                     descripcionTBX.Text = "";
                     concepto = null;
                 }
+                else { 
+                if(fechaLiquidacion == new DateTime(1, 1, 1)) { MessageBox.Show("No seleccionó la fecha de liquidación", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                 else { MessageBox.Show("No seleccionó ningun concepto", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            
+            
+            
             }
+
+
+
+        }
             catch (Exception) { }
-            }
+}
 
         private void actualizarCuadro()
         {
@@ -185,7 +196,7 @@ namespace Liquidacion
                         NumConceptoTBX.Text = concepto.Numero.ToString();
                         descripcionTBX.Text = concepto.Descripcion;
                     }
-                    calculo = new Calcular(concepto, empleado, double.Parse(IngresaTBX.Text));
+                    calculo = new Calcular(concepto, empleado, double.Parse(IngresaTBX.Text), fechaLiquidacion);
                     calculo.CambiarEstrategia(nuevaEstrategia);
                     concepto = calculo.CalcularLiquidacion();
                     Cuadro.Rows[fila].Cells[6].Value = Math.Round(concepto.Importe, 2);
@@ -383,5 +394,47 @@ namespace Liquidacion
         {
 
         }
+
+        private void MesCBX_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                int mes = 0;
+
+                int numero = (int)MesCBX.SelectedValue;
+                string consulta = "select numero from mes m where m.ID=" + numero.ToString() + " limit 1";
+                MySqlConnection conectar = Conexion.ObtenerConexion();
+                MySqlDataReader reader;
+                conectar.Open();
+                try
+                {
+                    Cuadro.Rows.Clear();
+                    TotalTXT.Text = "0";
+                    DescuentosTXT.Text = "0";
+                    RemunerativoTXT.Text = "0";
+
+                    MySqlCommand comand = new MySqlCommand(consulta, conectar);
+                    reader = comand.ExecuteReader();
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+                    foreach (DataRow x in dt.Rows)
+                    {
+                        mes = (int)x[0];
+                    }
+
+                }
+                catch (Exception) { }
+                finally { conectar.Close(); }
+                fechaLiquidacion = new DateTime(decimal.ToInt32(AñoNumeric.Value), mes, 1);
+
+
+            }
+            catch (Exception) { }
+        }
+
+        private void AñoNumeric_ValueChanged(object sender, EventArgs e)
+        {
+            MesCBX_SelectionChangeCommitted(sender, e);
+        }
     }
-    }
+}
